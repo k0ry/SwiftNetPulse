@@ -1,21 +1,26 @@
-SwiftNetPulse — схема двойного лицензирования
-ЧЕРНОВИК: НЕ ВСТУПИЛ В СИЛУ
+SwiftNetPulse — dual-licensing scheme
+DRAFT: NOT IN FORCE
 
-Правообладатель: [ПОЛНОЕ ИМЯ ИЛИ НАИМЕНОВАНИЕ ПРАВООБЛАДАТЕЛЯ]
-Год(ы) copyright: [ГОДЫ]
-Контакт по лицензированию: [ПОДТВЕРЖДЁННЫЙ КОНТАКТ]
+Rightsholder: [FULL NAME OR LEGAL NAME OF THE RIGHTSHOLDER]
+Copyright year(s): [YEARS]
+Licensing contact: [CONFIRMED CONTACT]
 
-Предлагаются два альтернативных основания использования:
+Two alternative bases of use are proposed:
 
-1. Бесплатная неисключительная лицензия исключительно для некоммерческого
-   использования: LICENSE-NONCOMMERCIAL.md.
-2. Отдельная платная коммерческая лицензия, заключаемая с правообладателем:
-   COMMERCIAL-LICENSE.md содержит проект условий для заполнения и согласования.
+1. A free non-exclusive license solely for noncommercial use:
+   LICENSE-NONCOMMERCIAL.md.
+2. A separate paid commercial license entered into with the rightsholder:
+   COMMERCIAL-LICENSE.md is a draft of terms to fill in and agree.
 
-До заполнения полей и принятия окончательных документов правообладателем
-эти черновики не предоставляют прав использования. Доступность репозитория
-сама по себе не является предоставлением коммерческой лицензии.
-Законные исключения из исключительного права этим уведомлением не ограничиваются.
-Ранее отдельно предоставленные права не изменяются этим черновиком.
+Until the fields are filled in and the final documents are adopted by the
+rightsholder, these drafts grant no rights of use. Availability of the
+repository itself is not a grant of a commercial license. Statutory exceptions
+to exclusive rights are not limited by this notice. Rights previously granted
+separately are not changed by this draft.
 
-Это не лицензия open source. Подготовка к выпуску: LICENSING.md.
+This is not an open-source license. Release preparation: LICENSING.md.
+
+English is proposed as the controlling text of the licenses, with Russian
+informational translations under docs/ru/. That language priority must be
+adopted by the rightsholder when the licenses are finalized; it is not in
+force while the documents remain drafts.

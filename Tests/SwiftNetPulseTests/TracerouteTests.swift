@@ -34,6 +34,55 @@ final class TracerouteTests: XCTestCase {
         XCTAssertTrue(result.log.contains("7: * * |"))
     }
 
+    func testEnglishAndRussianHopLabelsAndPrecision() {
+        let hops: TracerouteResult = .hops([
+            TraceHop(index: 10, address: "51.250.89.190", rtt: 0.0243),
+            TraceHop(index: 7),
+        ])
+        let english = hops.localizedLog(using: .english)
+        let russian = hops.localizedLog(using: .russian)
+        XCTAssertTrue(english.contains("Trace start"))
+        XCTAssertTrue(english.contains("10: 51.250.89.190 24.30 ms |"))
+        XCTAssertTrue(english.contains("7: * * |"))
+        XCTAssertTrue(russian.contains("Начало трассировки"))
+        XCTAssertTrue(russian.contains("10: 51.250.89.190 24,30 мс |"))
+        XCTAssertTrue(russian.contains("7: * * |"))
+        XCTAssertEqual(TracerouteResult.hops([]).localizedLog(using: .english), "Trace start")
+    }
+
+    func testTypedUnavailableReasonsLocalize() {
+        let socket = TracerouteDetails(
+            result: .unavailable(message: "ICMP socket could not be opened"),
+            unavailableMetadata: ProbeFailureMetadata(stage: .traceroute, reasonCode: ProbeReason.socket)
+        )
+        let dns = TracerouteDetails(
+            result: .unavailable(message: "cannot resolve example.test for traceroute"),
+            unavailableMetadata: ProbeFailureMetadata(
+                stage: .traceroute,
+                reasonCode: ProbeReason.tracerouteDNS,
+                arguments: ["example.test"]
+            )
+        )
+        let ipv4 = TracerouteDetails(
+            result: .unavailable(message: "traceroute supports IPv4 only"),
+            unavailableMetadata: ProbeFailureMetadata(stage: .traceroute, reasonCode: ProbeReason.ipv4Only)
+        )
+        XCTAssertEqual(socket.localizedLog(using: .english), "Traceroute unavailable: ICMP socket could not be opened")
+        XCTAssertEqual(socket.localizedLog(using: .russian), "Трассировка недоступна: не удалось открыть ICMP-сокет")
+        XCTAssertTrue(dns.localizedLog(using: .russian).contains("example.test"))
+        XCTAssertTrue(ipv4.localizedLog(using: .russian).contains("IPv4"))
+        XCTAssertEqual(socket.log, "Traceroute unavailable: ICMP socket could not be opened")
+    }
+
+    func testLegacyUnavailableStringIsRetainedExactly() {
+        let result = TracerouteResult.unavailable(message: "custom kernel message 0xdead")
+        XCTAssertEqual(
+            result.localizedLog(using: .russian),
+            "Трассировка недоступна: custom kernel message 0xdead"
+        )
+        XCTAssertEqual(result.log, "Traceroute unavailable: custom kernel message 0xdead")
+    }
+
     func testUnavailableWhenSocketCannotOpen() async {
         let tracer = ICMPPathTracer(socketFactory: { -1 })
         let monitor = try? ConnectionMonitor(
@@ -112,7 +161,9 @@ final class LiveTraceAttachingProber: EndpointProbing {
     func probe(_ endpoint: Endpoint, includeTrace: Bool) async -> ProbeResult {
         var result = await inner.probe(endpoint, includeTrace: includeTrace)
         if includeTrace, let host = endpoint.url.host {
-            result.traceroute = await tracer.trace(host: host, maxHops: 30)
+            let details = await tracer.trace(host: host, maxHops: 30)
+            result.traceroute = details.result
+            result.tracerouteFailureMetadata = details.unavailableMetadata
         }
         return result
     }

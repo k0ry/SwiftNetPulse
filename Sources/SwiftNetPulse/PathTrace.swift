@@ -45,7 +45,7 @@ final class ICMPPathTracer: PathTracing {
         self.socketFactory = socketFactory
     }
 
-    func trace(host: String, maxHops: Int) async -> TracerouteResult {
+    func trace(host: String, maxHops: Int) async -> TracerouteDetails {
         await Task.detached { [hopTimeout, socketFactory] in
             ICMPPathTracer.run(
                 host: host,
@@ -61,10 +61,14 @@ final class ICMPPathTracer: PathTracing {
         maxHops: Int,
         hopTimeout: TimeInterval,
         socketFactory: () -> Int32
-    ) -> TracerouteResult {
+    ) -> TracerouteDetails {
         let fd = socketFactory()
         guard fd >= 0 else {
-            return .unavailable(message: "ICMP socket could not be opened")
+            let metadata = ProbeFailureMetadata(stage: .traceroute, reasonCode: ProbeReason.socket)
+            return TracerouteDetails(
+                result: .unavailable(message: L10n.englishCompatibilityMessage(metadata)),
+                unavailableMetadata: metadata
+            )
         }
         defer { close(fd) }
 
@@ -72,15 +76,27 @@ final class ICMPPathTracer: PathTracing {
         do {
             destinationIP = try DNSResolver.resolve(host)
         } catch {
-            return .unavailable(message: "cannot resolve \(host) for traceroute")
+            let metadata = ProbeFailureMetadata(
+                stage: .traceroute,
+                reasonCode: ProbeReason.tracerouteDNS,
+                arguments: [host]
+            )
+            return TracerouteDetails(
+                result: .unavailable(message: L10n.englishCompatibilityMessage(metadata)),
+                unavailableMetadata: metadata
+            )
         }
 
         guard let destination = IPv4Address(destinationIP) else {
-            return .unavailable(message: "traceroute supports IPv4 only")
+            let metadata = ProbeFailureMetadata(stage: .traceroute, reasonCode: ProbeReason.ipv4Only)
+            return TracerouteDetails(
+                result: .unavailable(message: L10n.englishCompatibilityMessage(metadata)),
+                unavailableMetadata: metadata
+            )
         }
 
         let identifier = UInt16.random(in: 1 ... .max)
-        return PathTraceCollector.collect(maxHops: maxHops) { ttl in
+        let collected = PathTraceCollector.collect(maxHops: maxHops) { ttl in
             probeHop(
                 fd: fd,
                 destination: destination,
@@ -89,6 +105,7 @@ final class ICMPPathTracer: PathTracing {
                 timeout: hopTimeout
             )
         }
+        return TracerouteDetails(result: collected)
     }
 
     private static func probeHop(

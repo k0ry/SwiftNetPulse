@@ -1,6 +1,6 @@
 # Implementation plan: English-first multilingual SwiftNetPulse
 
-Status: proposed; implementation has not started.
+Status: implemented 16 September 2026. Evidence: tasks/verification.md.
 Initial supported languages: English (`en`, authoritative source) and Russian (`ru`).
 Additional languages follow the same workflow; no automatic promise to support all languages.
 
@@ -372,12 +372,12 @@ The engineering checklist is a dependency plan, not a promise of calendar comple
 
 ### H. Definition of done
 
-- [ ] Every surface in the scope table is delivered or explicitly documented as tool/raw content.
-- [ ] All new public methods have English comments and equivalent en/ru usage examples.
-- [ ] All L/R/T/M/C/D/H scenarios relevant to implemented behavior are covered and pass.
-- [ ] No keys or translation fragments leak in user-visible output; system/raw detail is labelled.
-- [ ] Old public constructors and exhaustive enum switches compile; structured values are stable.
-- [ ] English and Russian docs are current, navigable and semantically reviewed.
-- [ ] License drafts remain drafts; controlling-language proposal has not silently become a contract.
-- [ ] One real external consumer verifies both language bundles; macOS and iOS builds pass.
-- [ ] Final report states checks run, unsupported platform checks and any remaining known limitations.
+- [x] Every surface in the scope table is delivered or explicitly documented as tool/raw content.
+- [x] All new public methods have English comments and equivalent en/ru usage examples.
+- [x] All L/R/T/M/C/D/H scenarios relevant to implemented behavior are covered and pass.
+- [x] No keys or translation fragments leak in user-visible output; system/raw detail is labelled.
+- [x] Old public constructors and exhaustive enum switches compile; structured values are stable.
+- [x] English and Russian docs are current, navigable and semantically reviewed.
+- [x] License drafts remain drafts; controlling-language proposal has not silently become a contract.
+- [x] One real external consumer verifies both language bundles; macOS and iOS builds pass.
+- [x] Final report states checks run, unsupported platform checks and any remaining known limitations.

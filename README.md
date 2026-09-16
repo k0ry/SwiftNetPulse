@@ -1,22 +1,25 @@
 # SwiftNetPulse
 
-Swift SPM-библиотека для проверки списка URL: разовая диагностика, периодический мониторинг ошибок через **Combine** и трассировка маршрута по запросу.
+**Language:** [English](README.md) · [Русский](docs/ru/README.md)
 
-ICMP ping в v1 **не входит** в критерии успеха и не выполняется.
+A Swift package that checks a list of URLs: one-shot diagnosis, periodic error
+monitoring through **Combine**, and on-demand route tracing.
 
-## Установка
+ICMP ping is **not** part of the v1 success criteria and is not performed.
 
-В `Package.swift` приложения:
+## Installation
+
+In the application `Package.swift`:
 
 ```swift
 .package(path: "../SwiftNetPulse")
 ```
 
-или по URL репозитория, когда пакет опубликован.
+or by repository URL once the package is published.
 
-Платформы: iOS 15+, macOS 12+.
+Platforms: iOS 15+, macOS 12+.
 
-## Инициализация
+## Initialization
 
 ```swift
 import SwiftNetPulse
@@ -32,9 +35,20 @@ let monitor = try ConnectionMonitor(endpoints: [
 ])
 ```
 
-Одно правило на URL. Составные условия — `.all([...])`.
+One rule per URL. Combine conditions with `.all([...])`.
 
-## Разовая проверка `check()`
+Reports are English by default. Pass `localization:` for Russian or another
+supported table; two monitors can use different languages at the same time:
+
+```swift
+let english = try ConnectionMonitor(endpoints: endpoints) // English
+let russian = try ConnectionMonitor(endpoints: endpoints, localization: .russian)
+let report = await russian.check()
+print(report.log)
+print(report.localizedLog(using: .english)) // rerender without probing
+```
+
+## One-shot `check()`
 
 ```swift
 let cancellable = monitor.events.sink { event in
@@ -48,9 +62,11 @@ let report = await monitor.check()
 print(report.log)
 ```
 
-`report.log` — ориентировочный человекочитаемый отчёт (DNS, TCP, HTTPS, статус, скорость, preview тела). События успеха и ошибки приходят **по мере** завершения каждого URL, до возврата полного отчёта.
+`report.log` is an approximate human-readable report (DNS, TCP, HTTPS, status,
+speed, body preview). Success and failure events arrive **as each URL finishes**,
+before the full report is returned.
 
-## Периодический мониторинг (Combine)
+## Periodic monitoring (Combine)
 
 ```swift
 let failures = monitor.failures.sink { failure in
@@ -62,56 +78,65 @@ try monitor.startMonitoring(every: 30)
 monitor.stopMonitoring()
 ```
 
-В фоне применяются те же правила, что и в `check()`. Traceroute не запускается. В поток попадают только ошибки (транспорт или несовпадение правила). Успешный 404 при `.anyData` в `failures` не публикуется.
+Background monitoring uses the same rules as `check()`. Traceroute is not
+started. Only errors (transport or rule mismatch) are published. A successful
+404 under `.anyData` is not published on `failures`.
 
 ## Traceroute
 
 ```swift
 let route = await monitor.traceroute(to: "api.example.com")
-print(route.log)          // текст маршрута
-print(route.hopList)      // структурированные хопы
+print(route.log)          // route text
+print(route.hopList)      // structured hops
 ```
 
-Возвращает список хопов (таймаут хопа — без адреса и RTT) или `.unavailable`, если ICMP-сокет недоступен. Системный бинарь `traceroute` не вызывается.
+Returns a hop list (a hop timeout has no address or RTT) or `.unavailable` if
+the ICMP socket cannot be opened. The system `traceroute` binary is not invoked.
 
-В `check()` маршрут добавляется только если у эндпоинта `traceOnCheck == true`.
+In `check()`, a route is added only when the endpoint has `traceOnCheck == true`.
 
-## Замеры
+## Measurements
 
-До полезной нагрузки: DNS, TCP connect, TLS / HTTPS connect.  
-После: HTTP response time, total, скорость = байты тела / время ответа (если тело непустое и длительность > 0).
+Before payload: DNS, TCP connect, TLS / HTTPS connect.
+After: HTTP response time, total, speed = body bytes / response time (when the
+body is non-empty and the duration is greater than 0).
 
-## Разработка
+## Development
 
-Из корня репозитория на macOS с установленным Xcode:
+From the repository root on macOS with Xcode installed:
 
 ```bash
 make setup
 ```
 
-Команда проверяет инструменты, собирает пакет и запускает тесты. Дополнительные
-команды: `make test`, `make release`, `make ios`, `make help`.
-Для работы в Xcode откройте `Package.swift` и выберите схему `SwiftNetPulse`.
-Имя каталога репозитория — `SwiftNetPulse`, имя импортируемого модуля — `SwiftNetPulse`.
+The command checks tools, builds the package, and runs tests. Additional
+commands: `make test`, `make release`, `make ios`, `make help`.
+To work in Xcode, open `Package.swift` and select the `SwiftNetPulse` scheme.
+The repository directory name is `SwiftNetPulse`; the imported module name is
+`SwiftNetPulse`.
 
-Тесты отдельно: `swift test` из корня репозитория.
-Требования, архитектура и ограничения описаны в [DEVELOPMENT.md](DEVELOPMENT.md).
+Tests alone: `swift test` from the repository root.
+Requirements, architecture, and limitations are described in
+[DEVELOPMENT.md](DEVELOPMENT.md).
+Localization policy and translator workflow:
+[docs/LOCALIZATION.md](docs/LOCALIZATION.md).
+Public API usage: [docs/API.md](docs/API.md).
 
-## Лицензирование
+## Licensing
 
-Планируется двойное лицензирование SwiftNetPulse:
+SwiftNetPulse is planned to use dual licensing:
 
-- Бесплатное использование исключительно в некоммерческих целях — по
-  [некоммерческой лицензии](LICENSE-NONCOMMERCIAL.md).
-- Коммерческое использование, в том числе в платных или монетизируемых приложениях
-  и внутренних инструментах бизнеса, требует отдельной платной лицензии.
-  [Проект коммерческих условий](COMMERCIAL-LICENSE.md).
+- Free use solely for noncommercial purposes under the
+  [noncommercial license](LICENSE-NONCOMMERCIAL.md).
+- Commercial use, including in paid or monetized applications and internal
+  business tools, requires a separate paid license.
+  [Draft commercial terms](COMMERCIAL-LICENSE.md).
 
-**Лицензионные документы пока являются черновиками и не предоставляют прав:**
-необходимо подтвердить правообладателя, заполнить реквизиты и принять окончательные
-тексты. Контакт для приобретения лицензии: **[ПОДТВЕРЖДЁННЫЙ КОНТАКТ — ЗАПОЛНИТЬ]**.
-Цена и коммерческие условия пока не установлены.
+**The license documents are drafts and do not grant rights:** the rightsholder
+must be confirmed, the placeholders filled in, and the final texts adopted.
+Contact for purchasing a license: **[CONFIRMED CONTACT — FILL IN]**.
+Price and commercial terms are not yet set.
 
-Это модель с доступным исходным кодом и ограничением целей использования,
-а не open source. Общий статус — в [LICENSE](LICENSE), поля для завершения
-и источники — в [LICENSING.md](LICENSING.md).
+This is a source-available model with a restriction on purpose of use, not
+open source. Overall status is in [LICENSE](LICENSE); remaining fields and
+sources are in [LICENSING.md](LICENSING.md).

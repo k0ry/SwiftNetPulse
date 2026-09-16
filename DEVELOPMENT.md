@@ -1,80 +1,100 @@
-# Разработка SwiftNetPulse
+# Developing SwiftNetPulse
 
-## Окружение
+**Language:** [English](DEVELOPMENT.md) · [Русский](docs/ru/DEVELOPMENT.md)
 
-Нужен macOS с Xcode и Swift tools 5.9 или новее. Манифест использует режим языка
-Swift 5, минимальные платформы — iOS 15 и macOS 12. Импорты Darwin, Network и
-Combine делают текущую реализацию зависимой от платформ Apple.
+## Environment
 
-Сторонних пакетов, CocoaPods, серверов, ключей API и переменных окружения нет.
-Отдельный менеджер версий Swift не требуется: команды Makefile используют
-toolchain выбранного Xcode через `xcrun`.
+macOS with Xcode and Swift tools 5.9 or newer is required. The manifest uses
+Swift language mode 5. Minimum platforms are iOS 15 and macOS 12. Imports of
+Darwin, Network, and Combine make the current implementation dependent on Apple
+platforms.
 
-Проверенное окружение 16 сентября 2026: Apple Silicon, Xcode 26.4 (17E192),
-Apple Swift 6.3, SDK macOS/iOS 26.4. `swift test`: 28 тестов, 0 ошибок.
-Debug- и release-сборки macOS, а также сборка iOS без подписи прошли успешно.
-Тесты на iOS-симуляторе и физическом устройстве не запускались.
-Совместимость с минимальным Swift 5.9 отдельно не проверялась.
+There are no third-party packages, CocoaPods, servers, API keys, or environment
+variables. A separate Swift version manager is not required: Makefile commands
+use the toolchain of the selected Xcode via `xcrun`.
+
+Verified environment 16 September 2026: Apple Silicon, Xcode 26.4 (17E192),
+Apple Swift 6.3, SDK macOS/iOS 26.4. After localization: `swift test` 62 tests,
+0 failures; `python3 -m unittest discover -s Tests/LocalizationChecks` 9 tests,
+0 failures. Debug and release macOS builds, an unsigned iOS build (resource
+bundle includes `en.lproj` and `ru.lproj`), and
+`scripts/check-localization-consumer.sh` succeeded. Tests were not run on the
+iOS Simulator or a physical device. Compatibility with the minimum Swift 5.9 was
+not verified separately.
 
 ```sh
-make setup    # инструменты, debug-сборка, тесты
-make release  # оптимизированная сборка macOS
-make ios      # сборка iOS без подписи и физического устройства
+make setup    # tools, debug build, tests
+make release  # optimized macOS build
+make ios      # unsigned iOS build, no physical device
+make check-localization  # documentation and string-resource checks
 ```
 
-В Xcode откройте `Package.swift`, выберите схему `SwiftNetPulse` и My Mac
-для тестов. Для проверки iOS выберите доступное устройство или симулятор.
-Артефакты команд Makefile находятся в `.build/` и исключены из Git.
+In Xcode open `Package.swift`, select the `SwiftNetPulse` scheme and My Mac
+for tests. To exercise iOS, select an available device or simulator.
+Makefile artifacts live in `.build/` and are excluded from Git.
 
-Тесты открывают локальные TCP/HTTP-серверы на автоматически выбранных портах.
-Есть проверки DNS для `.invalid` и TCP timeout для `192.0.2.1`; результат этих
-проверок может зависеть от сетевого окружения. В ограниченной среде выполнения
-нужен доступ к локальным сокетам и пользовательскому кэшу компилятора.
+Tests open local TCP/HTTP servers on automatically chosen ports. There are DNS
+checks for `.invalid` and a TCP timeout against `192.0.2.1`; those results may
+depend on the network environment. A constrained execution environment needs
+access to local sockets and the user compiler cache.
 
-## Устройство библиотеки
+Localized message tables are loaded from `Bundle.module` (`en.lproj` and
+`ru.lproj`). Default library output is English regardless of the host OS
+language. A separate SwiftPM consumer should be used to confirm that resources
+load outside this package's test target; see
+`scripts/check-localization-consumer.sh`.
 
-| Компонент | Ответственность |
+To add a language, copy `Sources/SwiftNetPulse/Resources/en.lproj/Localizable.strings`
+to a new `xx.lproj`, translate documentation under `docs/xx/`, and register the
+language in [docs/translations.json](docs/translations.json). No new Swift API
+is required. Details: [docs/LOCALIZATION.md](docs/LOCALIZATION.md).
+
+## Library layout
+
+| Component | Responsibility |
 | --- | --- |
-| `ConnectionMonitor` | Публичный API, последовательный обход endpoint, события Combine, таймер мониторинга |
-| `Models` и `ProbeRule+Evaluate` | Конфигурация, результаты, проверки статуса и тела ответа |
-| `LiveEndpointProber` | Последовательность DNS → отдельная TCP-проверка → HTTP → правило → необязательный traceroute |
-| `DNSResolver`, `TCPProbe`, `HTTPProbe` | Системный DNS, NWConnection, URLSession и метрики |
-| `LiveNetworkSnapshotProvider` | Тип сети, локальный IPv4, DNS-серверы и эвристика VPN |
-| `ICMPPathTracer` | IPv4 ICMP echo с увеличением TTL, без внешнего процесса |
-| `LogFormatter` | Текстовые отчёты и форматирование хопов |
+| `ConnectionMonitor` | Public API, sequential endpoint walk, Combine events, monitoring timer |
+| `Models` and `ProbeRule+Evaluate` | Configuration, results, status and body checks |
+| `LiveEndpointProber` | DNS → separate TCP check → HTTP → rule → optional traceroute |
+| `DNSResolver`, `TCPProbe`, `HTTPProbe` | System DNS, NWConnection, URLSession, and metrics |
+| `LiveNetworkSnapshotProvider` | Network type, local IPv4, DNS servers, VPN heuristic |
+| `ICMPPathTracer` | IPv4 ICMP echo with increasing TTL, no external process |
+| `LogFormatter` | Text reports and hop formatting |
+| `Localization` | Per-instance language lookup with English fallback |
 
-Внутренние протоколы `EndpointProbing`, `PathTracing` и
-`NetworkSnapshotProviding` позволяют подменять системные операции в тестах.
-Тесты покрывают правила, события, остановку таймера, локальные HTTP/TCP,
-форматирование и управление трассировкой. Настоящий маршрут ICMP и TLS-handshake
-имеющимися тестами не проверяются.
+Internal protocols `EndpointProbing`, `PathTracing`, and
+`NetworkSnapshotProviding` allow system operations to be replaced in tests.
+Tests cover rules, events, timer stop, local HTTP/TCP, formatting, and traceroute
+control. A real ICMP route and a TLS handshake are not covered by the existing
+tests.
 
-## Ограничения и следующие задачи
+## Limitations and follow-up work
 
-Ниже — результаты чтения кода и диагностики компилятора; отдельные runtime-
-сценарии для каждого пункта не воспроизводились.
+The items below come from reading the code and compiler diagnostics; each
+runtime scenario was not reproduced individually.
 
-1. **Swift 6 concurrency.** Компилятор выдаёт предупреждения о захватах изменяемого
-   состояния в `TCPProbe` и `NetworkSnapshot`, non-Sendable `ConnectionMonitor`
-   и вызовах NSLock из async-тестов. До включения режима языка Swift 6 нужно
-   определить изоляцию состояния и обновить тестовые двойники.
-2. **Timeout и отмена.** Синхронный `getaddrinfo` не ограничен таймером endpoint;
-   traceroute запускается после вычисления `timings.total` и может увеличить
-   реальное время `check()`. `stopMonitoring()` останавливает таймер, но не
-   отменяет уже выполняющийся проход и его последующие события.
-3. **Измерения.** TCP-проверка создаёт отдельное соединение. URLSession затем
-   подключается самостоятельно; показанный `resolvedIP` не гарантирует адрес
-   HTTP-соединения. HTTP-метрики берутся из последней транзакции, включая случаи
-   редиректа. Скорость рассчитывается по времени получения тела ответа.
-4. **Валидация входа.** Нужны явные проверки схемы URL, конечности и допустимости
-   timeout/интервала и верхней границы `maxHops`; преобразования TTL в UInt16/Int32
-   не защищены от слишком больших значений.
-5. **Traceroute.** Реализация поддерживает только IPv4, хотя DNSResolver может
-   вернуть IPv6 первым. Парсер ICMP и поведение сокетов на реальных iOS-устройствах
-   требуют отдельных проверок.
-6. **Snapshot и память.** VPN определяется по именам интерфейсов; DNS берётся из
-   `/etc/resolv.conf`. Это ориентировочные сведения. HTTP-тело целиком сохраняется
-   в памяти без лимита размера, хотя в лог попадают только первые 240 байт.
+1. **Swift 6 concurrency.** The compiler warns about mutable-state captures in
+   `TCPProbe` and `NetworkSnapshot`, a non-Sendable `ConnectionMonitor`, and
+   NSLock use from async tests. Isolation must be defined before enabling Swift
+   language mode 6, and test doubles updated.
+2. **Timeout and cancellation.** Synchronous `getaddrinfo` is not bounded by the
+   endpoint timer; traceroute starts after `timings.total` is computed and can
+   increase the real duration of `check()`. `stopMonitoring()` stops the timer
+   but does not cancel an in-flight pass or its later events.
+3. **Measurements.** The TCP check opens a separate connection. URLSession then
+   connects on its own; the displayed `resolvedIP` is not guaranteed to be the
+   HTTP connection address. HTTP metrics come from the last transaction,
+   including redirects. Speed is computed from body-response time.
+4. **Input validation.** Explicit checks are needed for URL scheme, finiteness
+   and validity of timeout/interval, and an upper bound on `maxHops`; TTL
+   conversions to UInt16/Int32 are not guarded against oversized values.
+5. **Traceroute.** The implementation supports IPv4 only, even though
+   DNSResolver may return IPv6 first. The ICMP parser and socket behavior on
+   real iOS devices need separate verification.
+6. **Snapshot and memory.** VPN is inferred from interface names; DNS is read
+   from `/etc/resolv.conf`. These are approximate. The HTTP body is kept fully
+   in memory with no size limit, although the log shows only the first 240 bytes.
 
-Приоритет дальнейшей работы: определить гарантии timeout/отмены и потоков событий,
-добавить соответствующие тесты, затем подготовить переход на Swift 6.
+Priority of further work (outside localization): define timeout/cancellation and
+event-stream guarantees, add matching tests, then prepare a Swift 6 transition.
+Localization must not change those networking semantics.

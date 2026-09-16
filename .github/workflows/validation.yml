@@ -1,0 +1,23 @@
+name: Validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show toolchain
+        run: make doctor
+      - name: Localization checks
+        run: make check-localization
+      - name: Tests
+        run: make test
+      - name: macOS release build
+        run: make release
+      - name: Unsigned iOS build
+        run: make ios
+      - name: External consumer resources
+        run: sh scripts/check-localization-consumer.sh

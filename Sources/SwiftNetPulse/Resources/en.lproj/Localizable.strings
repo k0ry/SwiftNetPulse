@@ -1,0 +1,77 @@
+/* Report chrome */
+"report.title" = "NETWORK DIAGNOSIS";
+"report.date" = "Date: %1$@";
+"report.network_type" = "Network type: %1$@";
+"report.local_ip" = "Local IP: %1$@";
+"report.dns_servers" = "DNS servers: %1$@";
+"report.vpn" = "VPN detected: %1$@";
+"report.vpn.yes" = "YES";
+"report.vpn.no" = "NO";
+"report.finished" = "DIAGNOSIS FINISHED";
+
+/* Endpoint */
+"endpoint.separator" = "-----------------------------------------------";
+"endpoint.url" = "Endpoint: %1$@";
+"endpoint.host" = "Host: %1$@";
+
+/* Probe steps */
+"dns.resolved" = "DNS: %1$@";
+"dns.resolved_timed" = "DNS: %1$@ (%2$@)";
+"dns.failed" = "DNS: failed";
+"dns.failed_timed" = "DNS: failed (%1$@)";
+"tcp.connected" = "TCP: connected in %1$@";
+"tcp.failed" = "TCP: failed in %1$@";
+"https.connect" = "HTTPS connect: %1$@";
+"tls.handshake" = "TLS handshake: %1$@";
+"http.status" = "HTTP status: %1$@";
+"http.response" = "HTTP response: %1$@";
+"timing.total" = "Total: %1$@";
+"timing.speed" = "Speed: %1$@ %2$@";
+"unit.bytes_per_second" = "B/s";
+"unit.milliseconds" = "ms";
+
+/* Outcomes */
+"outcome.success" = "Outcome: success";
+"outcome.rule_mismatch" = "Outcome: rule mismatch";
+"outcome.transport_failure" = "Outcome: transport failure (%1$@)";
+"body.preview" = "Body preview:";
+"body.binary" = "<binary>";
+"raw.system_detail" = "System detail (raw): %1$@";
+
+/* Traceroute */
+"trace.start" = "Trace start";
+"trace.unavailable" = "Traceroute unavailable: %1$@";
+"trace.hop" = "%1$@: %2$@ %3$@ |";
+"trace.timeout_marker" = "*";
+"trace.socket" = "ICMP socket could not be opened";
+"trace.dns" = "cannot resolve %1$@ for traceroute";
+"trace.ipv4_only" = "traceroute supports IPv4 only";
+
+/* Path types */
+"path.wifi" = "wifi";
+"path.cellular" = "cellular";
+"path.ethernet" = "ethernet";
+"path.loopback" = "loopback";
+"path.other" = "other";
+"path.unsatisfied" = "unsatisfied";
+
+/* ConnectionMonitorError */
+"error.empty_endpoints" = "ConnectionMonitor requires at least one endpoint";
+"error.invalid_interval" = "Monitoring interval must be greater than zero";
+
+/* Transport failures */
+"failure.missing_host" = "missing host";
+"failure.dns_failed" = "DNS failed for %1$@";
+"failure.timeout_before_tcp" = "timeout before TCP";
+"failure.timeout_before_http" = "timeout before HTTP";
+"failure.tcp_failed" = "TCP %1$@:%2$@ failed";
+"failure.no_http_status" = "no HTTP status";
+"failure.non_http_response" = "non-HTTP response";
+"failure.url_timeout" = "request timed out";
+"failure.url_dns" = "DNS lookup failed";
+"failure.url_connect" = "connection failed";
+"failure.url_offline" = "device is offline";
+"failure.url_cancelled" = "request cancelled";
+"failure.url_tls" = "TLS handshake failed";
+"failure.url_generic" = "transport error %1$@ %2$@";
+"failure.generic_transport" = "transport failure";

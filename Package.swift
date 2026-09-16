@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftNetPulse",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
         .macOS(.v12),
@@ -12,10 +13,16 @@ let package = Package(
         .library(name: "SwiftNetPulse", targets: ["SwiftNetPulse"]),
     ],
     targets: [
-        .target(name: "SwiftNetPulse"),
+        .target(
+            name: "SwiftNetPulse",
+            resources: [
+                .process("Resources"),
+            ]
+        ),
         .testTarget(
             name: "SwiftNetPulseTests",
-            dependencies: ["SwiftNetPulse"]
+            dependencies: ["SwiftNetPulse"],
+            exclude: ["Fixtures"]
         ),
     ],
     swiftLanguageVersions: [.v5]

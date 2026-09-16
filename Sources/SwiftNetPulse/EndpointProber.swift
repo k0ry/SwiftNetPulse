@@ -5,7 +5,7 @@ protocol EndpointProbing: AnyObject {
 }
 
 protocol PathTracing: AnyObject {
-    func trace(host: String, maxHops: Int) async -> TracerouteResult
+    func trace(host: String, maxHops: Int) async -> TracerouteDetails
 }
 
 final class LiveEndpointProber: EndpointProbing {
@@ -20,15 +20,19 @@ final class LiveEndpointProber: EndpointProbing {
         var timings = ProbeTimings(total: 0)
         var resolvedIP: String?
         var traceroute: TracerouteResult?
+        var tracerouteFailureMetadata: ProbeFailureMetadata?
 
         func finish(
             outcome: ProbeOutcome,
             status: Int? = nil,
-            body: Data = Data()
+            body: Data = Data(),
+            metadata: ProbeFailureMetadata? = nil
         ) async -> ProbeResult {
             timings.total = Date().timeIntervalSince(startedAt)
             if includeTrace, let host = endpoint.url.host {
-                traceroute = await tracer.trace(host: host, maxHops: 30)
+                let details = await tracer.trace(host: host, maxHops: 30)
+                traceroute = details.result
+                tracerouteFailureMetadata = details.unavailableMetadata
             }
             return ProbeResult(
                 endpoint: endpoint,
@@ -37,7 +41,9 @@ final class LiveEndpointProber: EndpointProbing {
                 httpStatus: status,
                 body: body,
                 timings: timings,
-                traceroute: traceroute
+                traceroute: traceroute,
+                failureMetadata: metadata,
+                tracerouteFailureMetadata: tracerouteFailureMetadata
             )
         }
 
@@ -46,7 +52,11 @@ final class LiveEndpointProber: EndpointProbing {
         }
 
         guard let host = endpoint.url.host, !host.isEmpty else {
-            return await finish(outcome: .transportFailure("missing host"))
+            let metadata = ProbeFailureMetadata(stage: .dns, reasonCode: ProbeReason.missingHost)
+            return await finish(
+                outcome: .transportFailure(L10n.englishCompatibilityMessage(metadata)),
+                metadata: metadata
+            )
         }
 
         if DNSResolver.isIPAddress(host) {
@@ -58,23 +68,47 @@ final class LiveEndpointProber: EndpointProbing {
                 timings.dns = Date().timeIntervalSince(dnsStart)
             } catch {
                 timings.dns = Date().timeIntervalSince(dnsStart)
-                return await finish(outcome: .transportFailure("DNS failed for \(host)"))
+                let metadata = ProbeFailureMetadata(
+                    stage: .dns,
+                    reasonCode: ProbeReason.dnsFailed,
+                    arguments: [host]
+                )
+                return await finish(
+                    outcome: .transportFailure(L10n.englishCompatibilityMessage(metadata)),
+                    metadata: metadata
+                )
             }
         }
 
         if Date().timeIntervalSince(startedAt) >= endpoint.timeout {
-            return await finish(outcome: .transportFailure("timeout before TCP"))
+            let metadata = ProbeFailureMetadata(stage: .tcp, reasonCode: ProbeReason.timeoutBeforeTCP)
+            return await finish(
+                outcome: .transportFailure(L10n.englishCompatibilityMessage(metadata)),
+                metadata: metadata
+            )
         }
 
         let target = resolvedIP ?? host
         let tcp = await TCPProbe.connect(host: target, port: endpoint.port, timeout: remaining())
         timings.tcpConnect = tcp.duration
         if !tcp.succeeded {
-            return await finish(outcome: .transportFailure("TCP \(target):\(endpoint.port) failed"))
+            let metadata = ProbeFailureMetadata(
+                stage: .tcp,
+                reasonCode: ProbeReason.tcpFailed,
+                arguments: [target, String(endpoint.port)]
+            )
+            return await finish(
+                outcome: .transportFailure(L10n.englishCompatibilityMessage(metadata)),
+                metadata: metadata
+            )
         }
 
         if Date().timeIntervalSince(startedAt) >= endpoint.timeout {
-            return await finish(outcome: .transportFailure("timeout before HTTP"))
+            let metadata = ProbeFailureMetadata(stage: .http, reasonCode: ProbeReason.timeoutBeforeHTTP)
+            return await finish(
+                outcome: .transportFailure(L10n.englishCompatibilityMessage(metadata)),
+                metadata: metadata
+            )
         }
 
         let http = await HTTPProbe.fetch(url: endpoint.url, timeout: remaining())
@@ -83,10 +117,17 @@ final class LiveEndpointProber: EndpointProbing {
         timings.httpResponse = http.httpResponse
 
         if let transportError = http.transportError {
-            return await finish(outcome: .transportFailure(transportError))
+            return await finish(
+                outcome: .transportFailure(transportError),
+                metadata: http.failureMetadata
+            )
         }
         guard let status = http.status else {
-            return await finish(outcome: .transportFailure("no HTTP status"))
+            let metadata = ProbeFailureMetadata(stage: .http, reasonCode: ProbeReason.noHTTPStatus)
+            return await finish(
+                outcome: .transportFailure(L10n.englishCompatibilityMessage(metadata)),
+                metadata: metadata
+            )
         }
 
         timings.transferSpeedBytesPerSecond = ProbeTimings.transferSpeed(

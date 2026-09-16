@@ -1,0 +1,27 @@
+NETWORK DIAGNOSIS
+Date: 2026-09-16T12:00:00.000Z
+Network type: wifi
+Local IP: 192.168.31.57
+DNS servers: 192.168.31.1
+VPN detected: NO
+
+-----------------------------------------------
+Endpoint: https://skills.example.com/root
+Host: skills.example.com
+-----------------------------------------------
+DNS: 51.250.89.190 (6.0 ms)
+TCP: connected in 15.0 ms
+HTTPS connect: 33.0 ms
+TLS handshake: 10.0 ms
+HTTP status: 404
+HTTP response: 30.0 ms
+Total: 63.0 ms
+Speed: 1800 B/s
+Outcome: success
+Body preview:
+{"error":404,"error_text":"Root request prohibited"}
+Trace start
+1: 192.168.0.1 1.00 ms |
+2: * * |
+
+DIAGNOSIS FINISHED

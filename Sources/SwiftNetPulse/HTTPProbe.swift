@@ -4,6 +4,7 @@ struct HTTPProbeResult {
     var status: Int?
     var body: Data
     var transportError: String?
+    var failureMetadata: ProbeFailureMetadata?
     var httpsConnect: TimeInterval?
     var tls: TimeInterval?
     var httpResponse: TimeInterval?
@@ -27,6 +28,67 @@ final class MetricsCollector: NSObject, URLSessionTaskDelegate {
     }
 }
 
+enum TransportErrorMapper {
+    static func map(_ error: Error) -> (message: String, metadata: ProbeFailureMetadata) {
+        let nsError = error as NSError
+        let urlError = error as? URLError
+        let code = urlError?.code ?? URLError.Code(rawValue: nsError.code)
+        let domain = nsError.domain
+        let usesURLDomain = domain == NSURLErrorDomain || urlError != nil
+        let raw = error.localizedDescription
+
+        func metadata(stage: ProbeStage, reason: String, arguments: [String] = []) -> ProbeFailureMetadata {
+            ProbeFailureMetadata(
+                stage: stage,
+                reasonCode: reason,
+                arguments: arguments,
+                systemDomain: domain,
+                systemCode: nsError.code,
+                rawDetail: raw
+            )
+        }
+
+        if usesURLDomain {
+            switch code {
+            case .timedOut:
+                let meta = metadata(stage: .http, reason: ProbeReason.urlTimeout)
+                return (L10n.englishCompatibilityMessage(meta), meta)
+            case .cannotFindHost, .dnsLookupFailed:
+                let meta = metadata(stage: .dns, reason: ProbeReason.urlDNS)
+                return (L10n.englishCompatibilityMessage(meta), meta)
+            case .cannotConnectToHost, .networkConnectionLost:
+                let meta = metadata(stage: .tcp, reason: ProbeReason.urlConnect)
+                return (L10n.englishCompatibilityMessage(meta), meta)
+            case .notConnectedToInternet, .dataNotAllowed:
+                let meta = metadata(stage: .http, reason: ProbeReason.urlOffline)
+                return (L10n.englishCompatibilityMessage(meta), meta)
+            case .cancelled:
+                let meta = metadata(stage: .http, reason: ProbeReason.urlCancelled)
+                return (L10n.englishCompatibilityMessage(meta), meta)
+            case .secureConnectionFailed,
+                 .serverCertificateUntrusted,
+                 .serverCertificateHasBadDate,
+                 .serverCertificateHasUnknownRoot,
+                 .serverCertificateNotYetValid,
+                 .clientCertificateRejected,
+                 .clientCertificateRequired,
+                 .appTransportSecurityRequiresSecureConnection:
+                let meta = metadata(stage: .tls, reason: ProbeReason.urlTLS)
+                return (L10n.englishCompatibilityMessage(meta), meta)
+            default:
+                break
+            }
+        }
+
+        let meta = metadata(
+            stage: .http,
+            reason: ProbeReason.urlGeneric,
+            arguments: [domain, String(nsError.code)]
+        )
+        return (L10n.englishCompatibilityMessage(meta), meta)
+    }
+}
+
 enum HTTPProbe {
     static func fetch(url: URL, timeout: TimeInterval) async -> HTTPProbeResult {
         let configuration = URLSessionConfiguration.ephemeral
@@ -44,10 +106,15 @@ enum HTTPProbe {
             let (data, response) = try await session.data(for: request, delegate: collector)
             let http = response as? HTTPURLResponse
             let timings = extract(collector.metrics)
+            let nonHTTP = http == nil
+            let metadata: ProbeFailureMetadata? = nonHTTP
+                ? ProbeFailureMetadata(stage: .http, reasonCode: ProbeReason.nonHTTPResponse)
+                : nil
             return HTTPProbeResult(
                 status: http?.statusCode,
                 body: data,
-                transportError: http == nil ? "non-HTTP response" : nil,
+                transportError: nonHTTP ? L10n.englishCompatibilityMessage(metadata!) : nil,
+                failureMetadata: metadata,
                 httpsConnect: timings.connect,
                 tls: timings.tls,
                 httpResponse: timings.response,
@@ -55,10 +122,12 @@ enum HTTPProbe {
             )
         } catch {
             let timings = extract(collector.metrics)
+            let mapped = TransportErrorMapper.map(error)
             return HTTPProbeResult(
                 status: nil,
                 body: Data(),
-                transportError: error.localizedDescription,
+                transportError: mapped.message,
+                failureMetadata: mapped.metadata,
                 httpsConnect: timings.connect,
                 tls: timings.tls,
                 httpResponse: timings.response,

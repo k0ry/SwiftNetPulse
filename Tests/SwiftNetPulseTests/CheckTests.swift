@@ -72,4 +72,80 @@ final class CheckTests: XCTestCase {
         XCTAssertTrue(report.log.contains("two.test"))
         XCTAssertTrue(report.log.contains("transport failure") || report.log.contains("TCP"))
     }
+
+    func testDefaultMonitorRendersEnglishRegardlessOfSystemFactory() async throws {
+        let result = sampleResult(endpoint: sampleEndpoint(host: "one.test"), outcome: .success, status: 200)
+        let monitor = try makeMonitor(
+            endpoints: [result.endpoint],
+            prober: ScriptedProber(results: [result])
+        )
+        let report = await monitor.check()
+        XCTAssertTrue(report.log.contains("NETWORK DIAGNOSIS"))
+        XCTAssertFalse(report.log.contains("СЕТЕВАЯ ДИАГНОСТИКА"))
+    }
+
+    func testTwoMonitorsUseIndependentLanguages() async throws {
+        let result = sampleResult(
+            endpoint: sampleEndpoint(host: "one.test"),
+            outcome: .success,
+            status: 200,
+            body: Data("ok".utf8)
+        )
+        let english = try makeMonitor(
+            endpoints: [result.endpoint],
+            prober: ScriptedProber(results: [result]),
+            localization: .english
+        )
+        let russian = try makeMonitor(
+            endpoints: [result.endpoint],
+            prober: ScriptedProber(results: [result]),
+            localization: .russian
+        )
+        let englishReport = await english.check()
+        let russianReport = await russian.check()
+        XCTAssertTrue(englishReport.log.contains("NETWORK DIAGNOSIS"))
+        XCTAssertTrue(russianReport.log.contains("СЕТЕВАЯ ДИАГНОСТИКА"))
+        XCTAssertEqual(englishReport.results[0].outcome, russianReport.results[0].outcome)
+        XCTAssertEqual(englishReport.results[0].httpStatus, 200)
+    }
+
+    func testRerenderingSavedReportDoesNotCallProber() async throws {
+        let prober = ScriptedProber(results: [sampleResult()])
+        let monitor = try makeMonitor(endpoints: [sampleEndpoint()], prober: prober)
+        let report = await monitor.check()
+        XCTAssertEqual(prober.callCount, 1)
+        let stored = report.log
+        let againEnglish = report.localizedLog(using: .english)
+        let russian = report.localizedLog(using: .russian)
+        XCTAssertEqual(prober.callCount, 1)
+        XCTAssertEqual(report.log, stored)
+        XCTAssertTrue(againEnglish.contains("NETWORK DIAGNOSIS"))
+        XCTAssertTrue(russian.contains("СЕТЕВАЯ ДИАГНОСТИКА"))
+        XCTAssertEqual(report.results.count, 1)
+    }
+
+    func testCustomStoredLogIsNotTranslated() {
+        let report = DiagnosisReport(
+            date: Date(timeIntervalSince1970: 1_789_560_000),
+            snapshot: NetworkSnapshot(pathType: "wifi"),
+            results: [sampleResult()],
+            log: "hand-written log"
+        )
+        XCTAssertEqual(report.log, "hand-written log")
+        XCTAssertTrue(report.localizedLog(using: .russian).contains("СЕТЕВАЯ ДИАГНОСТИКА"))
+        XCTAssertFalse(report.localizedLog(using: .russian).contains("hand-written log"))
+    }
+
+    func testCheckCarriesTracerouteMetadata() async throws {
+        let tracer = RecordingTracer(result: .unavailable(message: "ICMP socket could not be opened"))
+        tracer.details.unavailableMetadata = ProbeFailureMetadata(stage: .traceroute, reasonCode: ProbeReason.socket)
+        let endpoint = sampleEndpoint(host: "traced.test", traceOnCheck: true)
+        let inner = ScriptedProber(results: [sampleResult(endpoint: endpoint)])
+        let prober = LiveTraceAttachingProber(inner: inner, tracer: tracer)
+        let monitor = try makeMonitor(endpoints: [endpoint], prober: prober, tracer: tracer, localization: .russian)
+        let report = await monitor.check()
+        XCTAssertEqual(report.results[0].tracerouteFailureMetadata?.reasonCode, ProbeReason.socket)
+        XCTAssertTrue(report.log.contains("Трассировка недоступна"))
+        XCTAssertTrue(report.log.contains("не удалось открыть ICMP-сокет"))
+    }
 }

@@ -80,11 +80,16 @@ final class ScriptedProber: EndpointProbing {
 
 final class RecordingTracer: PathTracing {
     private let lock = NSLock()
-    var result: TracerouteResult
+    var details: TracerouteDetails
     private(set) var hosts: [String] = []
 
+    var result: TracerouteResult {
+        get { details.result }
+        set { details.result = newValue }
+    }
+
     init(result: TracerouteResult = .hops([TraceHop(index: 1, address: "10.0.0.1", rtt: 0.01)])) {
-        self.result = result
+        self.details = TracerouteDetails(result: result)
     }
 
     var callCount: Int {
@@ -99,11 +104,11 @@ final class RecordingTracer: PathTracing {
         lock.unlock()
     }
 
-    func trace(host: String, maxHops: Int) async -> TracerouteResult {
+    func trace(host: String, maxHops: Int) async -> TracerouteDetails {
         lock.lock()
         hosts.append(host)
         lock.unlock()
-        return result
+        return details
     }
 }
 
@@ -117,9 +122,16 @@ func makeMonitor(
     endpoints: [Endpoint],
     prober: EndpointProbing,
     tracer: PathTracing = RecordingTracer(),
-    snapshot: NetworkSnapshotProviding = FixedSnapshot()
+    snapshot: NetworkSnapshotProviding = FixedSnapshot(),
+    localization: ReportLocalization = .english
 ) throws -> ConnectionMonitor {
-    try ConnectionMonitor(endpoints: endpoints, prober: prober, tracer: tracer, snapshotProvider: snapshot)
+    try ConnectionMonitor(
+        endpoints: endpoints,
+        prober: prober,
+        tracer: tracer,
+        snapshotProvider: snapshot,
+        localization: localization
+    )
 }
 
 final class LocalTCPListener {

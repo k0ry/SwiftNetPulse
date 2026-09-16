@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "canonicalLanguage": "en",
+  "languages": [
+    "en",
+    "ru"
+  ],
+  "documents": [
+    {
+      "id": "readme",
+      "en": "README.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/README.md",
+          "sourceDigest": "8766096f87f2d8014a16607fc6beb2e743198c31066dd28ca746775189e409d4",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "development",
+      "en": "DEVELOPMENT.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/DEVELOPMENT.md",
+          "sourceDigest": "ee982302bb81fdffdd5dab7e86c39d210e8bea3071c507c699a8306f15f539bc",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "licensing",
+      "en": "LICENSING.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/LICENSING.md",
+          "sourceDigest": "a7b0053ada84011fcff59380c60555953d1c5ac51aa86117bcde9c0cfd584880",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "license",
+      "en": "LICENSE",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/LICENSE.md",
+          "sourceDigest": "4e30bed6d9f941798777a3723bc1f3360fb9e0e57cfe1d0331b103f69504c932",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "license-noncommercial",
+      "en": "LICENSE-NONCOMMERCIAL.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/LICENSE-NONCOMMERCIAL.md",
+          "sourceDigest": "e96c40c2f6693518cef78bd0aa77967899e15437292240be654346df9598a681",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "license-commercial",
+      "en": "COMMERCIAL-LICENSE.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/COMMERCIAL-LICENSE.md",
+          "sourceDigest": "72fc72989bfdb4f9ee53a47352bc5306a6bcfff81e7f6737ecd3ba63cb3a9fd0",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "localization",
+      "en": "docs/LOCALIZATION.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/LOCALIZATION.md",
+          "sourceDigest": "096e3893aa508e7f897fc48421cb973fc0dcbace0104368bd91f8b9035471c92",
+          "status": "current"
+        }
+      }
+    },
+    {
+      "id": "api",
+      "en": "docs/API.md",
+      "translations": {
+        "ru": {
+          "path": "docs/ru/API.md",
+          "sourceDigest": "af3c8630b19802c7defe1543b18c4ad84ad873414bc86eca680952c1a3afd9ed",
+          "status": "current"
+        }
+      }
+    }
+  ],
+  "resources": {
+    "en": "Sources/SwiftNetPulse/Resources/en.lproj/Localizable.strings",
+    "ru": "Sources/SwiftNetPulse/Resources/ru.lproj/Localizable.strings"
+  },
+  "licensePlaceholders": [
+    {
+      "id": "rightsholder_full_status",
+      "markers": {
+        "en": "[FULL NAME OR LEGAL NAME OF THE RIGHTSHOLDER]",
+        "ru": "[\u041f\u041e\u041b\u041d\u041e\u0415 \u0418\u041c\u042f \u0418\u041b\u0418 \u041d\u0410\u0418\u041c\u0415\u041d\u041e\u0412\u0410\u041d\u0418\u0415 \u041f\u0420\u0410\u0412\u041e\u041e\u0411\u041b\u0410\u0414\u0410\u0422\u0415\u041b\u042f]"
+      },
+      "files": {
+        "en": "LICENSE",
+        "ru": "docs/ru/LICENSE.md"
+      }
+    },
+    {
+      "id": "copyright_years_status",
+      "markers": {
+        "en": "[YEARS]",
+        "ru": "[\u0413\u041e\u0414\u042b]"
+      },
+      "files": {
+        "en": "LICENSE",
+        "ru": "docs/ru/LICENSE.md"
+      }
+    },
+    {
+      "id": "confirmed_contact",
+      "markers": {
+        "en": "[CONFIRMED CONTACT]",
+        "ru": "[\u041f\u041e\u0414\u0422\u0412\u0415\u0420\u0416\u0414\u0401\u041d\u041d\u042b\u0419 \u041a\u041e\u041d\u0422\u0410\u041a\u0422]"
+      },
+      "files": {
+        "en": "LICENSE",
+        "ru": "docs/ru/LICENSE.md"
+      }
+    },
+    {
+      "id": "rightsholder_nc",
+      "markers": {
+        "en": "[FULL NAME OR LEGAL NAME]",
+        "ru": "[\u041f\u041e\u041b\u041d\u041e\u0415 \u0418\u041c\u042f \u0418\u041b\u0418 \u041d\u0410\u0418\u041c\u0415\u041d\u041e\u0412\u0410\u041d\u0418\u0415]"
+      },
+      "files": {
+        "en": "LICENSE-NONCOMMERCIAL.md",
+        "ru": "docs/ru/LICENSE-NONCOMMERCIAL.md"
+      }
+    },
+    {
+      "id": "copyright_nc",
+      "markers": {
+        "en": "[YEARS] [RIGHTSHOLDER]",
+        "ru": "[\u0413\u041e\u0414\u042b] [\u041f\u0420\u0410\u0412\u041e\u041e\u0411\u041b\u0410\u0414\u0410\u0422\u0415\u041b\u042c]"
+      },
+      "files": {
+        "en": "LICENSE-NONCOMMERCIAL.md",
+        "ru": "docs/ru/LICENSE-NONCOMMERCIAL.md"
+      }
+    },
+    {
+      "id": "contact_nc",
+      "markers": {
+        "en": "[CONFIRMED CONTACT]",
+        "ru": "[\u041f\u041e\u0414\u0422\u0412\u0415\u0420\u0416\u0414\u0401\u041d\u041d\u042b\u0419 \u041a\u041e\u041d\u0422\u0410\u041a\u0422]"
+      },
+      "files": {
+        "en": "LICENSE-NONCOMMERCIAL.md",
+        "ru": "docs/ru/LICENSE-NONCOMMERCIAL.md"
+      }
+    },
+    {
+      "id": "versions_nc",
+      "markers": {
+        "en": "[VERSIONS OR COMMITS]",
+        "ru": "[\u0412\u0415\u0420\u0421\u0418\u0418 \u0418\u041b\u0418 \u041a\u041e\u041c\u041c\u0418\u0422\u042b]"
+      },
+      "files": {
+        "en": "LICENSE-NONCOMMERCIAL.md",
+        "ru": "docs/ru/LICENSE-NONCOMMERCIAL.md"
+      }
+    },
+    {
+      "id": "effective_date_nc",
+      "markers": {
+        "en": "[EFFECTIVE DATE]",
+        "ru": "[\u0414\u0410\u0422\u0410]"
+      },
+      "files": {
+        "en": "LICENSE-NONCOMMERCIAL.md",
+        "ru": "docs/ru/LICENSE-NONCOMMERCIAL.md"
+      }
+    },
+    {
+      "id": "jurisdiction_nc",
+      "markers": {
+        "en": "[FILL IN AFTER CHOOSING A JURISDICTION:",
+        "ru": "[\u0417\u0410\u041f\u041e\u041b\u041d\u0418\u0422\u042c \u041f\u041e\u0421\u041b\u0415 \u0412\u042b\u0411\u041e\u0420\u0410 \u042e\u0420\u0418\u0421\u0414\u0418\u041a\u0426\u0418\u0418:"
+      },
+      "files": {
+        "en": "LICENSE-NONCOMMERCIAL.md",
+        "ru": "docs/ru/LICENSE-NONCOMMERCIAL.md"
+      }
+    },
+    {
+      "id": "fill_in_commercial",
+      "markers": {
+        "en": "[FILL IN]",
+        "ru": "[\u0417\u0410\u041f\u041e\u041b\u041d\u0418\u0422\u042c]"
+      },
+      "files": {
+        "en": "COMMERCIAL-LICENSE.md",
+        "ru": "docs/ru/COMMERCIAL-LICENSE.md"
+      }
+    },
+    {
+      "id": "contact_commercial",
+      "markers": {
+        "en": "[CONFIRMED CONTACT]",
+        "ru": "[\u041f\u041e\u0414\u0422\u0412\u0415\u0420\u0416\u0414\u0401\u041d\u041d\u042b\u0419 \u041a\u041e\u041d\u0422\u0410\u041a\u0422]"
+      },
+      "files": {
+        "en": "COMMERCIAL-LICENSE.md",
+        "ru": "docs/ru/COMMERCIAL-LICENSE.md"
+      }
+    },
+    {
+      "id": "readme_contact",
+      "markers": {
+        "en": "[CONFIRMED CONTACT \u2014 FILL IN]",
+        "ru": "[\u041f\u041e\u0414\u0422\u0412\u0415\u0420\u0416\u0414\u0401\u041d\u041d\u042b\u0419 \u041a\u041e\u041d\u0422\u0410\u041a\u0422 \u2014 \u0417\u0410\u041f\u041e\u041b\u041d\u0418\u0422\u042c]"
+      },
+      "files": {
+        "en": "README.md",
+        "ru": "docs/ru/README.md"
+      }
+    }
+  ],
+  "draftMarkers": [
+    {
+      "file": "LICENSE",
+      "text": "DRAFT: NOT IN FORCE"
+    },
+    {
+      "file": "docs/ru/LICENSE.md",
+      "text": "\u0427\u0415\u0420\u041d\u041e\u0412\u0418\u041a: \u041d\u0415 \u0412\u0421\u0422\u0423\u041f\u0418\u041b \u0412 \u0421\u0418\u041b\u0423"
+    },
+    {
+      "file": "LICENSE-NONCOMMERCIAL.md",
+      "text": "DRAFT. This is not an effective grant of rights."
+    },
+    {
+      "file": "docs/ru/LICENSE-NONCOMMERCIAL.md",
+      "text": "\u0427\u0415\u0420\u041d\u041e\u0412\u0418\u041a. \u041d\u0435 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u043c \u043f\u0440\u0435\u0434\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u043f\u0440\u0430\u0432."
+    },
+    {
+      "file": "COMMERCIAL-LICENSE.md",
+      "text": "DRAFT FOR NEGOTIATION"
+    },
+    {
+      "file": "docs/ru/COMMERCIAL-LICENSE.md",
+      "text": "\u0427\u0415\u0420\u041d\u041e\u0412\u0418\u041a \u0414\u041b\u042f \u0421\u041e\u0413\u041b\u0410\u0421\u041e\u0412\u0410\u041d\u0418\u042f"
+    },
+    {
+      "file": "README.md",
+      "text": "The license documents are drafts and do not grant rights"
+    },
+    {
+      "file": "docs/ru/README.md",
+      "text": "\u041b\u0438\u0446\u0435\u043d\u0437\u0438\u043e\u043d\u043d\u044b\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u043f\u043e\u043a\u0430 \u044f\u0432\u043b\u044f\u044e\u0442\u0441\u044f \u0447\u0435\u0440\u043d\u043e\u0432\u0438\u043a\u0430\u043c\u0438 \u0438 \u043d\u0435 \u043f\u0440\u0435\u0434\u043e\u0441\u0442\u0430\u0432\u043b\u044f\u044e\u0442 \u043f\u0440\u0430\u0432"
+    }
+  ]
+}

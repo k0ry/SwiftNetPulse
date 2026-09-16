@@ -1,62 +1,72 @@
-# Подготовка лицензирования SwiftNetPulse
+# Preparing SwiftNetPulse licensing
 
-Статус на 16 сентября 2026: документы подготовлены как черновики.
-Подтверждённая модель: бесплатное использование исключительно в некоммерческих
-целях; коммерческое использование — только по отдельной платной лицензии.
+**Language:** [English](LICENSING.md) · [Русский](docs/ru/LICENSING.md)
 
-## Что проверено
+Status on 16 September 2026: documents are prepared as drafts.
+Confirmed model: free use solely for noncommercial purposes; commercial use
+only under a separate paid license.
 
-В рабочем дереве до этой подготовки отсутствовали лицензии и copyright-уведомления.
-В доступной локальной истории один коммит `4db5430 Initial commit`; его автор
-указан как Filipp. Метаданные Git не подтверждают юридического правообладателя,
-полноту прав на исходники или согласие использовать контакт автора для продаж.
-Внешнее происхождение кода и история других копий проекта не проверялись.
-В `Package.swift` нет сторонних пакетных зависимостей.
+English is proposed as the controlling legal text, with Russian informational
+translations in `docs/ru/`. The rightsholder must adopt that relationship when
+finalizing; this file does not make the drafts effective.
 
-## Комплект
+## What was checked
 
-- `LICENSE`: статус и схема двух альтернативных вариантов лицензирования.
-- `LICENSE-NONCOMMERCIAL.md`: самостоятельный проект бесплатной ограниченной
-  лицензии, включая изменение и распространение.
-- `COMMERCIAL-LICENSE.md`: заполняемый проект условий платного договора.
-- README: краткое описание модели и ссылки на документы.
+The working tree had no licenses or copyright notices before this preparation.
+The available local history has one commit `4db5430 Initial commit`; its author
+is recorded as Filipp. Git metadata does not confirm a legal rightsholder,
+completeness of rights in the sources, or consent to use the author's contact
+for sales. External origin of the code and history of other copies were not
+checked. `Package.swift` has no third-party package dependencies.
 
-Некоторые детали бесплатной лицензии — предложения для проверки: определение
-коммерческой цели, порядок распространения, прекращение при нарушении и отсутствие
-отдельного патентного разрешения. Пользователь подтвердил модель лицензирования,
-но эти юридические детали отдельно не согласовывал.
+## Set of documents
 
-## Что требуется до выпуска
+- `LICENSE`: status and the scheme of two alternative licensing options.
+  Russian informational translation: `docs/ru/LICENSE.md`.
+- `LICENSE-NONCOMMERCIAL.md`: standalone draft of a free restricted license,
+  including modification and distribution. Translation:
+  `docs/ru/LICENSE-NONCOMMERCIAL.md`.
+- `COMMERCIAL-LICENSE.md`: fill-in draft of paid-agreement terms. Translation:
+  `docs/ru/COMMERCIAL-LICENSE.md`.
+- README: short description of the model and links to the documents.
 
-1. Указать полное имя/наименование правообладателя, годы copyright, подтвердить
-   права на весь лицензируемый код и возможность двойного лицензирования.
-2. Указать подтверждённый контакт для приобретения коммерческой лицензии.
-3. Выбрать версии, дату действия, применимое право; проверить текст с юристом
-   соответствующей юрисдикции, в том числе определения коммерческого использования.
-4. Для коммерческого договора согласовать стороны, цену, оплату, срок, территорию,
-   способы использования, распространение и остальные отмеченные условия.
-5. Принять окончательные тексты и согласованно удалить статус черновика из LICENSE,
-   обеих лицензий и README. Проверить, что незаполненных полей не осталось.
+Some details of the free license are proposals for review: the definition of
+commercial purpose, distribution rules, termination on breach, and the absence
+of a separate patent grant. The user confirmed the licensing model but did not
+separately agree those legal details.
 
-Существующие лицензии на ранее выпущенные копии, если они обнаружатся, нельзя
-считать отменёнными только из-за нового текста в этом репозитории.
-Изменения не опубликованы и не отправлены в удалённый репозиторий.
+## Required before release
 
-## Источники и границы проверки
+1. State the full name of the rightsholder, copyright years, and confirm rights
+   in all licensed code and the ability to dual-license.
+2. State a confirmed contact for purchasing a commercial license.
+3. Choose versions, effective date, and governing law; have the text reviewed
+   by a lawyer of the relevant jurisdiction, including the definition of
+   commercial use.
+4. For the commercial agreement, settle the parties, price, payment, term,
+   territory, modes of use, distribution, and the other marked terms.
+5. Adopt the final texts and consistently remove draft status from LICENSE,
+   both licenses, and the README. Confirm that no unfilled fields remain.
 
-Сверка с первичными источниками выполнена 16 сентября 2026. Тексты выше — собственные
-проекты, а не лицензии MIT, Creative Commons или одобренные OSI документы.
+Existing licenses on previously released copies, if any are found, cannot be
+treated as revoked merely because of a new text in this repository.
+Changes have not been published or pushed to a remote repository.
 
-- [Open Source Initiative, Open Source Definition, пункт 6](https://opensource.org/osd):
-  open source не допускает ограничения по области использования, включая бизнес.
-  Поэтому модель с запретом бесплатного коммерческого использования так не называется.
+## Sources and limits of the review
+
+Cross-check against primary sources was done on 16 September 2026. The texts
+above are original drafts, not MIT, Creative Commons, or OSI-approved licenses.
+
+- [Open Source Initiative, Open Source Definition, section 6](https://opensource.org/osd):
+  open source does not allow restricting field of endeavour, including business.
+  A model that forbids free commercial use is therefore not called open source.
 - [WIPO, Copyright FAQ](https://www.wipo.int/en/web/copyright/faq-copyright):
-  разрешения на использование выдаются обладателем прав; лицензирование может быть
-  возмездным или безвозмездным. Это основание для проверки личности и полномочий
-  правообладателя, а не доказательство прав конкретного автора Git.
-- [Creative Commons, FAQ](https://creativecommons.org/faq/): CC не рекомендует свои
-  лицензии для программного кода. Поэтому CC BY-NC здесь не применяется.
+  permission to use is granted by the rights holder; licensing may be for a fee
+  or free of charge. This is a reason to verify the identity and authority of
+  the rightsholder, not proof of rights of a particular Git author.
+- [Creative Commons, FAQ](https://creativecommons.org/faq/): CC does not
+  recommend its licenses for software. CC BY-NC is therefore not used here.
 
-Эти источники подтверждают общие принципы, но не удостоверяют юридическую силу
-конкретного проекта договора в неизвестной юрисдикции. Необходима проверка
-окончательного текста специалистом после заполнения данных.
+These sources support general principles but do not certify legal effect of a
+particular draft agreement in an unknown jurisdiction. A specialist must review
+the final text after the fields are filled in.

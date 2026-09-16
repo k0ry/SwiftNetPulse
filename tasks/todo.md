@@ -1,15 +1,15 @@
 # Multilingual implementation checklist
 
-All tasks are pending. English is canonical; initial translations are English/Russian.
+All tasks completed 16 September 2026. English is canonical; initial translations are English/Russian.
 This file is an engineering worklist, not a translated public guide.
 
 ## 1. Freeze localization and compatibility contracts (M)
 Description: Inventory owned strings and define explicit language/fallback/error-metadata APIs.
 Acceptance:
 
-- [ ] Inventory covers docs, logs, errors, help.
-- [ ] Legacy enum/initializer compatibility is specified.
-- [ ] Default English fixtures captured.
+- [x] Inventory covers docs, logs, errors, help.
+- [x] Legacy enum/initializer compatibility is specified.
+- [x] Default English fixtures captured.
 Verification: review existing clients; run current tests; check English fixtures.
 Dependencies: none.
 Files: docs/LOCALIZATION.md, docs/translations.json, Tests/SwiftNetPulseTests/LogFormatterTests.swift.
@@ -18,9 +18,9 @@ Files: docs/LOCALIZATION.md, docs/translations.json, Tests/SwiftNetPulseTests/Lo
 Description: Make root guides English and retain complete Russian counterparts.
 Acceptance:
 
-- [ ] Both pages exist in both languages.
-- [ ] Paired language links work.
-- [ ] Commands/examples match.
+- [x] Both pages exist in both languages.
+- [x] Paired language links work.
+- [x] Commands/examples match.
 Verification: local link check and run documented build/test commands.
 Dependencies: 1.
 Files: README.md, DEVELOPMENT.md, docs/ru/README.md, docs/ru/DEVELOPMENT.md.
@@ -29,9 +29,9 @@ Files: README.md, DEVELOPMENT.md, docs/ru/README.md, docs/ru/DEVELOPMENT.md.
 Description: Translate root status/guide to English, preserve Russian versions and all unresolved fields.
 Acceptance:
 
-- [ ] Draft status retained.
-- [ ] No invented owner/contact.
-- [ ] Canonical/translation relationship clearly proposed.
+- [x] Draft status retained.
+- [x] No invented owner/contact.
+- [x] Canonical/translation relationship clearly proposed.
 Verification: side-by-side semantic and placeholder review.
 Dependencies: 1.
 Files: LICENSE, LICENSING.md, docs/ru/LICENSE.md, docs/ru/LICENSING.md.
@@ -40,9 +40,9 @@ Files: LICENSE, LICENSING.md, docs/ru/LICENSE.md, docs/ru/LICENSING.md.
 Description: Produce English drafts and corresponding informational Russian translations.
 Acceptance:
 
-- [ ] NC restriction and separate paid-license model unchanged.
-- [ ] No contract terms filled by assumption.
-- [ ] Language priority remains subject to adoption.
+- [x] NC restriction and separate paid-license model unchanged.
+- [x] No contract terms filled by assumption.
+- [x] Language priority remains subject to adoption.
 Verification: clause-by-clause legal translation review; link/placeholder check.
 Dependencies: 3.
 Files: LICENSE-NONCOMMERCIAL.md, COMMERCIAL-LICENSE.md, docs/ru/LICENSE-NONCOMMERCIAL.md, docs/ru/COMMERCIAL-LICENSE.md.
@@ -51,24 +51,24 @@ Files: LICENSE-NONCOMMERCIAL.md, COMMERCIAL-LICENSE.md, docs/ru/LICENSE-NONCOMME
 Description: Record source revisions/digests, glossary and stale-translation handling.
 Acceptance:
 
-- [ ] Every public page mapped.
-- [ ] Translator instructions in en/ru.
-- [ ] Adding a language requires no duplicated code API.
+- [x] Every public page mapped.
+- [x] Translator instructions in en/ru.
+- [x] Adding a language requires no duplicated code API.
 Verification: simulate changed source digest; review glossary and navigation.
 Dependencies: 2, 4.
 Files: docs/LOCALIZATION.md, docs/ru/LOCALIZATION.md, docs/translations.json.
 
 ## Checkpoint A
-- [ ] Documentation coverage and links complete; licensing drafts preserved.
-- [ ] Review proposed public API contract before runtime implementation.
+- [x] Documentation coverage and links complete; licensing drafts preserved.
+- [x] Review proposed public API contract before runtime implementation.
 
 ## 6. Package localization resources and resolver (M)
 Description: Add explicit instance-scoped language lookup with English fallback.
 Acceptance:
 
-- [ ] en/ru lookup works.
-- [ ] Unsupported/missing-key fallback works.
-- [ ] Concurrent selections are isolated.
+- [x] en/ru lookup works.
+- [x] Unsupported/missing-key fallback works.
+- [x] Concurrent selections are isolated.
 Verification: resolver tests including ru-RU, unsupported language, missing key and OS-independent default.
 Dependencies: 1.
 Files: Package.swift, Sources/SwiftNetPulse/Localization.swift, Resources/en.lproj/Localizable.strings, Resources/ru.lproj/Localizable.strings (under Sources/SwiftNetPulse), Tests/SwiftNetPulseTests/LocalizationTests.swift.
@@ -77,9 +77,9 @@ Files: Package.swift, Sources/SwiftNetPulse/Localization.swift, Resources/en.lpr
 Description: Separate DNS/TCP failure classification from human-readable messages using the contract from task 1.
 Acceptance:
 
-- [ ] Existing source initializers/cases compile.
-- [ ] Typed metadata propagates into failures.
-- [ ] Legacy raw strings have documented fallback.
+- [x] Existing source initializers/cases compile.
+- [x] Typed metadata propagates into failures.
+- [x] Legacy raw strings have documented fallback.
 Verification: new metadata tests plus existing TCP and monitoring tests; compile old-client fixture.
 Dependencies: 1.
 Files: Sources/SwiftNetPulse/Models.swift, Sources/SwiftNetPulse/EndpointProber.swift, Sources/SwiftNetPulse/LogFormatter.swift, Tests/SwiftNetPulseTests/FailureMetadataTests.swift.
@@ -88,9 +88,9 @@ Files: Sources/SwiftNetPulse/Models.swift, Sources/SwiftNetPulse/EndpointProber.
 Description: Map URLSession failures to stable domain/code metadata with optional raw system detail.
 Acceptance:
 
-- [ ] Known codes have localized-summary keys; unknown codes have generic fallback.
-- [ ] OS text is not used to classify failure.
-- [ ] Old HTTP/probe consumers continue to compile.
+- [x] Known codes have localized-summary keys; unknown codes have generic fallback.
+- [x] OS text is not used to classify failure.
+- [x] Old HTTP/probe consumers continue to compile.
 Verification: R08/R09 plus existing HTTPProbeTests.
 Dependencies: 7.
 Files: Sources/SwiftNetPulse/HTTPProbe.swift, Sources/SwiftNetPulse/EndpointProber.swift, Tests/SwiftNetPulseTests/FailureMetadataTests.swift.
@@ -99,9 +99,9 @@ Files: Sources/SwiftNetPulse/HTTPProbe.swift, Sources/SwiftNetPulse/EndpointProb
 Description: Add a companion detailed result and internal trace path, preserving the public legacy enum unchanged.
 Acceptance:
 
-- [ ] Old exhaustive switches still compile.
-- [ ] Typed unavailable metadata survives the detailed path and check() report.
-- [ ] Legacy traceroute() remains an adapter returning the existing enum.
+- [x] Old exhaustive switches still compile.
+- [x] Typed unavailable metadata survives the detailed path and check() report.
+- [x] Legacy traceroute() remains an adapter returning the existing enum.
 Verification: C01, T02/T03, old constructors, protocol doubles and trace-on-check tests.
 Dependencies: 7, 8a.
 Files: Sources/SwiftNetPulse/Models.swift, Sources/SwiftNetPulse/PathTrace.swift, Sources/SwiftNetPulse/EndpointProber.swift, Tests/SwiftNetPulseTests/TracerouteTests.swift, Tests/SwiftNetPulseTests/TestSupport.swift.
@@ -110,9 +110,9 @@ Files: Sources/SwiftNetPulse/Models.swift, Sources/SwiftNetPulse/PathTrace.swift
 Description: Render structured results with chosen language/locale and retain default English behavior.
 Acceptance:
 
-- [ ] All report labels/statuses owned by library translated.
-- [ ] No logic searches translated text.
-- [ ] Rerendering needs no network.
+- [x] All report labels/statuses owned by library translated.
+- [x] No logic searches translated text.
+- [x] Rerendering needs no network.
 Verification: en/ru report fixtures, units/decimal locale tests, unchanged data and English compatibility tests.
 Dependencies: 6, 8b.
 Files: Sources/SwiftNetPulse/LogFormatter.swift, Sources/SwiftNetPulse/Models.swift, both Localizable.strings files, Tests/SwiftNetPulseTests/LogFormatterTests.swift.
@@ -121,9 +121,9 @@ Files: Sources/SwiftNetPulse/LogFormatter.swift, Sources/SwiftNetPulse/Models.sw
 Description: Add localized error/trace presentation with explicit selection and safe unknown-error handling.
 Acceptance:
 
-- [ ] Every owned error and trace label translated.
-- [ ] System details identified as raw.
-- [ ] Legacy trace.log defaults to English.
+- [x] Every owned error and trace label translated.
+- [x] System details identified as raw.
+- [x] Legacy trace.log defaults to English.
 Verification: en/ru error/trace fixtures; unknown legacy strings preserved; timeout hop formatting.
 Dependencies: 9.
 Files: Sources/SwiftNetPulse/Models.swift, Sources/SwiftNetPulse/LogFormatter.swift, both Localizable.strings files, Tests/SwiftNetPulseTests/TracerouteTests.swift.
@@ -132,24 +132,24 @@ Files: Sources/SwiftNetPulse/Models.swift, Sources/SwiftNetPulse/LogFormatter.sw
 Description: Wire immutable presentation options into newly generated reports and expose the additive detailed traceroute entrypoint; document standalone rendering.
 Acceptance:
 
-- [ ] Existing init remains compatible.
-- [ ] Two monitors can use different languages.
-- [ ] Examples include English default and explicit Russian.
+- [x] Existing init remains compatible.
+- [x] Two monitors can use different languages.
+- [x] Examples include English default and explicit Russian.
 Verification: monitor tests with deterministic doubles and old-client compile check.
 Dependencies: 10.
 Files: Sources/SwiftNetPulse/ConnectionMonitor.swift, Tests/SwiftNetPulseTests/CheckTests.swift, README.md, docs/ru/README.md.
 
 ## Checkpoint B
-- [ ] All existing and localization tests pass; no global locale mutation.
-- [ ] API compatibility, English default and translation completeness reviewed.
+- [x] All existing and localization tests pass; no global locale mutation.
+- [x] API compatibility, English default and translation completeness reviewed.
 
 ## 12. Localize development help (S)
 Description: English help by default; explicit Russian help without changing command names.
 Acceptance:
 
-- [ ] make help is English.
-- [ ] make help LANG=ru is Russian.
-- [ ] Unsupported language falls back to English.
+- [x] make help is English.
+- [x] make help LANG=ru is Russian.
+- [x] Unsupported language falls back to English.
 Verification: run all three help variants; verify commands remain unchanged.
 Dependencies: 5.
 Files: Makefile, scripts/help.sh (if separation is useful).
@@ -158,9 +158,9 @@ Files: Makefile, scripts/help.sh (if separation is useful).
 Description: Automate link, key, placeholder, source-digest and draft-marker consistency checks.
 Acceptance:
 
-- [ ] Both docs/resources checked.
-- [ ] Intentionally broken fixtures are detected.
-- [ ] Local and CI entrypoints match.
+- [x] Both docs/resources checked.
+- [x] Intentionally broken fixtures are detected.
+- [x] Local and CI entrypoints match.
 Verification: temporary bad-key/link/placeholder/stale-digest fixtures; real tree passes.
 Dependencies: 5, 11, 12.
 Files: scripts/check-localization.py, Tests/LocalizationChecks/test_checks.py, Makefile, .github/workflows/validation.yml, docs/translations.json.
@@ -169,9 +169,9 @@ Files: scripts/check-localization.py, Tests/LocalizationChecks/test_checks.py, M
 Description: Validate resource loading from a separate SwiftPM consumer and document adding languages.
 Acceptance:
 
-- [ ] en/ru work in consuming package.
-- [ ] macOS release and iOS resources build.
-- [ ] Documentation and revision map synchronized.
+- [x] en/ru work in consuming package.
+- [x] macOS release and iOS resources build.
+- [x] Documentation and revision map synchronized.
 Verification: make test, make release, make ios; temporary external consumer smoke test; localization checks.
 Dependencies: 13.
 Files: scripts/check-localization-consumer.sh, DEVELOPMENT.md, docs/ru/DEVELOPMENT.md, docs/translations.json.
@@ -180,9 +180,9 @@ Files: scripts/check-localization-consumer.sh, DEVELOPMENT.md, docs/ru/DEVELOPME
 Description: Document defaults, localized rendering and compatibility semantics at declarations and in the bilingual API guide.
 Acceptance:
 
-- [ ] Monitor initializers, report rendering and detailed traceroute methods have English doc comments.
-- [ ] English/Russian examples compile and describe legacy raw-detail limitations.
-- [ ] Each guide includes language navigation and current source revision.
+- [x] Monitor initializers, report rendering and detailed traceroute methods have English doc comments.
+- [x] English/Russian examples compile and describe legacy raw-detail limitations.
+- [x] Each guide includes language navigation and current source revision.
 Verification: C01/C02/D06; inspect public declarations and guide links.
 Dependencies: 11, 13.
 Files: Sources/SwiftNetPulse/ConnectionMonitor.swift, Sources/SwiftNetPulse/Models.swift, docs/API.md, docs/ru/API.md, docs/translations.json.
@@ -191,17 +191,17 @@ Files: Sources/SwiftNetPulse/ConnectionMonitor.swift, Sources/SwiftNetPulse/Mode
 Description: Complete localization API comments, synchronize translator/developer guides and execute the final matrix.
 Acceptance:
 
-- [ ] Language versus numeric locale, fallback and raw-content exceptions are explicit.
-- [ ] Every matrix row has a recorded passing check or justified limitation.
-- [ ] Supported document translations are current; no source behavior beyond localization changed.
+- [x] Language versus numeric locale, fallback and raw-content exceptions are explicit.
+- [x] Every matrix row has a recorded passing check or justified limitation.
+- [x] Supported document translations are current; no source behavior beyond localization changed.
 Verification: all final commands from plan.md; matrix audit and diff review.
 Dependencies: 14, 15.
 Files: Sources/SwiftNetPulse/Localization.swift, docs/LOCALIZATION.md, docs/ru/LOCALIZATION.md, docs/translations.json, tasks/verification.md (implementation evidence only).
 
 ## Checkpoint C
-- [ ] All acceptance criteria complete and final diff reviewed.
-- [ ] License drafts have not been finalized; owner/contact decisions remain separate.
-- [ ] No publish/push performed.
+- [x] All acceptance criteria complete and final diff reviewed.
+- [x] License drafts have not been finalized; owner/contact decisions remain separate.
+- [x] No publish/push performed.
 
 
 ## Test references and task completion records

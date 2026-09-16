@@ -1,93 +1,98 @@
-# SwiftNetPulse Noncommercial License — проект 1.0
+# SwiftNetPulse Noncommercial License — draft 1.0
 
-**ЧЕРНОВИК. Не является действующим предоставлением прав.** Правообладатель
-должен заполнить поля и принять окончательный текст; после этого удалить
-пометки о черновике согласованно во всех документах.
+**DRAFT. This is not an effective grant of rights.** The rightsholder must fill
+in the fields and adopt the final text; after that, remove draft markings
+consistently from all documents.
 
-- Правообладатель: [ПОЛНОЕ ИМЯ ИЛИ НАИМЕНОВАНИЕ].
-- Copyright: [ГОДЫ] [ПРАВООБЛАДАТЕЛЬ].
-- Контакт: [ПОДТВЕРЖДЁННЫЙ КОНТАКТ].
-- Версии программы, к которым применяется лицензия: [ВЕРСИИ ИЛИ КОММИТЫ].
-- Дата начала действия: [ДАТА].
+- Rightsholder: [FULL NAME OR LEGAL NAME].
+- Copyright: [YEARS] [RIGHTSHOLDER].
+- Contact: [CONFIRMED CONTACT].
+- Program versions to which the license applies: [VERSIONS OR COMMITS].
+- Effective date: [EFFECTIVE DATE].
 
-## 1. Предмет и определения
+English is proposed as the controlling text of this license. The Russian
+translation in `docs/ru/LICENSE-NONCOMMERCIAL.md` is informational. That
+priority is not in force while this document remains a draft.
 
-«Программа» — код, тесты и документация SwiftNetPulse, к которым правообладатель
-применил эту лицензию, включая их охраняемые части в изменённых версиях.
-Компоненты третьих лиц, явно обозначенные отдельными лицензиями, регулируются
-своими лицензиями.
+## 1. Subject and definitions
 
-«Некоммерческое использование» — использование исключительно для целей,
-не направленных на получение коммерческого преимущества или денежного
-вознаграждения, прямо или косвенно. Например, личное обучение, хобби или
-исследование без коммерческой цели могут соответствовать этому определению.
+“Program” means the SwiftNetPulse code, tests, and documentation to which the
+rightsholder has applied this license, including their protected parts in
+modified versions. Third-party components clearly marked with separate licenses
+are governed by those licenses.
 
-«Коммерческое использование» включает использование в платном продукте,
-подписке, монетизируемом рекламой приложении, платной услуге или заказной
-разработке, а также во внутренних инструментах, обеспечивающих коммерческую
-деятельность. Бесплатность конечного приложения, отсутствие прибыли или
-некоммерческий статус организации сами по себе не означают некоммерческого
-использования: учитывается цель конкретного использования.
+“Noncommercial use” means use solely for purposes not directed at obtaining a
+commercial advantage or monetary compensation, directly or indirectly. For
+example, personal study, a hobby, or research without a commercial purpose may
+meet this definition.
 
-## 2. Предоставляемые права
+“Commercial use” includes use in a paid product, subscription, advertising-
+monetized application, paid service, or commissioned development, as well as in
+internal tools that support commercial activity. The fact that an end-user
+application is free, that there is no profit, or that an organization has
+non-profit status does not by itself make the use noncommercial: the purpose of
+the particular use is what counts.
 
-При соблюдении этой лицензии правообладатель безвозмездно предоставляет
-неисключительное право использовать, воспроизводить, изучать, изменять и
-распространять Программу в исходной или скомпилированной форме исключительно
-для некоммерческого использования, на территории всего мира, на срок действия
-исключительного права, если лицензия не прекращена по разделу 6.
+## 2. Grant of rights
 
-Коммерческое использование, в том числе коммерческая интеграция, тестирование
-и эксплуатация, требует отдельной платной лицензии до начала такого использования.
-Настоящий документ не предоставляет коммерческих прав.
+Subject to this license, the rightsholder royalty-free grants a non-exclusive
+right to use, reproduce, study, modify, and distribute the Program in source or
+compiled form solely for noncommercial use, worldwide, for the term of the
+exclusive right, unless the license is terminated under section 6.
 
-## 3. Распространение и изменения
+Commercial use, including commercial integration, testing, and operation,
+requires a separate paid license before such use begins. This document does not
+grant commercial rights.
 
-При распространении Программы или её охраняемых частей необходимо:
+## 3. Distribution and modifications
 
-- сохранить уведомления об авторских правах и полный текст этой лицензии;
-- явно обозначить внесённые изменения и не приписывать их правообладателю;
-- передать получателю ограничение на некоммерческое использование и сведения
-  о необходимости отдельной платной лицензии для коммерческого использования;
-- не заявлять о предоставлении получателю более широких прав на исходную
-  Программу, чем допускает эта лицензия.
+When distributing the Program or its protected parts you must:
 
-Для бинарной поставки текст лицензии и уведомления включаются в документацию
-или раздел юридических уведомлений приложения. Раскрывать исходный код своего
-приложения эта лицензия не обязывает. Получатель получает права на исходную
-Программу непосредственно от правообладателя на этих условиях; права на изменения
-должны быть предоставлены их авторами в объёме, необходимом для такого использования.
+- retain copyright notices and the full text of this license;
+- clearly mark changes made and not attribute them to the rightsholder;
+- pass on to the recipient the noncommercial-use restriction and information
+  about the need for a separate paid license for commercial use;
+- not claim to grant the recipient broader rights in the original Program than
+  this license allows.
 
-## 4. Сохранение прав
+For binary distribution, include the license text and notices in the
+application documentation or legal-notices section. This license does not
+require you to disclose the source code of your application. The recipient
+obtains rights in the original Program directly from the rightsholder on these
+terms; rights in modifications must be granted by their authors to the extent
+needed for such use.
 
-Право собственности на исключительные права не передаётся. Лицензия не разрешает
-использовать товарные знаки для обозначения собственного продукта или утверждать
-одобрение продукта правообладателем. Отдельная патентная лицензия не предоставляется.
-Обязательные права пользователя и законные исключения сохраняются.
+## 4. Reservation of rights
 
-## 5. Гарантии и ответственность
+Ownership of the exclusive rights is not transferred. The license does not
+permit using trademarks to designate your own product or claiming endorsement
+of the product by the rightsholder. A separate patent license is not granted.
+Mandatory user rights and statutory exceptions are preserved.
 
-В пределах, допускаемых применимым законодательством, Программа предоставляется
-«как есть», без гарантий пригодности для конкретной цели, бесперебойной работы
-или отсутствия ошибок. Поддержка и обновления не обещаются.
+## 5. Warranty and liability
 
-В тех же пределах правообладатель не отвечает за убытки, потерю данных, прибыли
-или перерывы деятельности, возникшие вследствие использования Программы.
-Это условие не исключает ответственность, которую нельзя исключить по закону.
+To the extent permitted by applicable law, the Program is provided “as is”,
+without warranties of fitness for a particular purpose, uninterrupted operation,
+or freedom from errors. Support and updates are not promised.
 
-## 6. Прекращение и альтернативная лицензия
+To the same extent the rightsholder is not liable for damages, loss of data,
+profits, or interruption of business arising from use of the Program. This
+clause does not exclude liability that cannot be excluded by law.
 
-При нарушении условий предоставленные этой лицензией права прекращаются.
-Пользователь должен прекратить действия, требующие этих прав; восстановление
-возможно по письменному разрешению правообладателя. Права добросовестных
-получателей ранее переданных копий не прекращаются только из-за нарушения
-распространителя, если получатели сами соблюдают лицензию.
+## 6. Termination and alternative license
 
-Отдельная коммерческая лицензия может предоставить иные права. Её условия
-применяются к указанным в ней версиям и способам использования; уплата денег
-без согласованного предоставления прав сама по себе не заменяет договор.
+On breach of the terms, the rights granted by this license terminate. The user
+must stop acts that require those rights; restoration is possible with the
+rightsholder’s written permission. Rights of good-faith recipients of
+previously transferred copies do not terminate solely because of the
+distributor’s breach if the recipients themselves comply with the license.
 
-## 7. Применимое право
+A separate commercial license may grant other rights. Its terms apply to the
+versions and modes of use stated in it; payment of money without an agreed
+grant of rights does not by itself replace a contract.
 
-[ЗАПОЛНИТЬ ПОСЛЕ ВЫБОРА ЮРИСДИКЦИИ: применимое право и порядок разрешения споров,
-с учётом обязательных норм. Проверить весь текст с юристом этой юрисдикции.]
+## 7. Governing law
+
+[FILL IN AFTER CHOOSING A JURISDICTION: governing law and dispute resolution,
+taking mandatory rules into account. Review the entire text with a lawyer of
+that jurisdiction.]

@@ -1,11 +1,18 @@
 import Combine
 import Foundation
 
+/// Probes a list of HTTP endpoints, publishes Combine events, and can trace IPv4 routes.
+///
+/// The existing ``init(endpoints:)`` keeps English presentation. Pass
+/// ``ReportLocalization`` to select Russian or another supported table for newly
+/// generated `DiagnosisReport.log` values. Structured results and publishers are
+/// independent of language.
 public final class ConnectionMonitor {
     private let endpoints: [Endpoint]
     private let prober: EndpointProbing
     private let tracer: PathTracing
     private let snapshotProvider: NetworkSnapshotProviding
+    private let localization: ReportLocalization
     private let queue: DispatchQueue
 
     private let eventsSubject = PassthroughSubject<ProbeEvent, Never>()
@@ -23,13 +30,20 @@ public final class ConnectionMonitor {
         failuresSubject.eraseToAnyPublisher()
     }
 
+    /// Creates a monitor with English report rendering.
     public convenience init(endpoints: [Endpoint]) throws {
+        try self.init(endpoints: endpoints, localization: .english)
+    }
+
+    /// Creates a monitor whose `check()` reports use `localization`.
+    public convenience init(endpoints: [Endpoint], localization: ReportLocalization) throws {
         let tracer = ICMPPathTracer()
         try self.init(
             endpoints: endpoints,
             prober: LiveEndpointProber(tracer: tracer),
             tracer: tracer,
-            snapshotProvider: LiveNetworkSnapshotProvider()
+            snapshotProvider: LiveNetworkSnapshotProvider(),
+            localization: localization
         )
     }
 
@@ -38,7 +52,8 @@ public final class ConnectionMonitor {
         prober: EndpointProbing,
         tracer: PathTracing,
         snapshotProvider: NetworkSnapshotProviding,
-        queue: DispatchQueue = DispatchQueue(label: "SwiftNetPulse.monitor")
+        queue: DispatchQueue = DispatchQueue(label: "SwiftNetPulse.monitor"),
+        localization: ReportLocalization = .english
     ) throws {
         guard !endpoints.isEmpty else {
             throw ConnectionMonitorError.emptyEndpointList
@@ -47,6 +62,7 @@ public final class ConnectionMonitor {
         self.prober = prober
         self.tracer = tracer
         self.snapshotProvider = snapshotProvider
+        self.localization = localization
         self.queue = queue
     }
 
@@ -54,7 +70,7 @@ public final class ConnectionMonitor {
         let date = Date()
         let snapshot = await snapshotProvider.snapshot()
         let results = await runProbes(includeTrace: true)
-        let log = LogFormatter.report(date: date, snapshot: snapshot, results: results)
+        let log = LogFormatter.report(date: date, snapshot: snapshot, results: results, localization: localization)
         return DiagnosisReport(date: date, snapshot: snapshot, results: results, log: log)
     }
 
@@ -82,7 +98,13 @@ public final class ConnectionMonitor {
         stateLock.unlock()
     }
 
+    /// Legacy adapter. Returns the unchanged ``TracerouteResult`` enum.
     public func traceroute(to host: String, maxHops: Int = 30) async -> TracerouteResult {
+        await tracerouteDetails(to: host, maxHops: maxHops).result
+    }
+
+    /// Detailed traceroute including typed unavailability metadata.
+    public func tracerouteDetails(to host: String, maxHops: Int = 30) async -> TracerouteDetails {
         await tracer.trace(host: host, maxHops: maxHops)
     }
 

@@ -1,13 +1,13 @@
-.PHONY: help doctor setup build test release ios clean
+.PHONY: help doctor setup build test release ios clean check-localization
+
+ifeq ($(origin LANG),command line)
+HELP_LANGUAGE := $(LANG)
+else
+HELP_LANGUAGE := en
+endif
 
 help:
-	@echo "make setup   — проверить инструменты, собрать пакет и запустить тесты"
-	@echo "make doctor  — показать версии Xcode, Swift и доступные SDK"
-	@echo "make build   — debug-сборка для macOS"
-	@echo "make test    — тесты для macOS"
-	@echo "make release — release-сборка для macOS"
-	@echo "make ios     — сборка для iOS без подписи"
-	@echo "make clean   — очистить артефакты SwiftPM"
+	@HELP_LANGUAGE="$(HELP_LANGUAGE)" sh scripts/help.sh
 
 doctor:
 	xcode-select -p
@@ -33,3 +33,7 @@ ios:
 
 clean:
 	xcrun swift package clean
+
+check-localization:
+	python3 scripts/check-localization.py
+	python3 -m unittest discover -s Tests/LocalizationChecks -v

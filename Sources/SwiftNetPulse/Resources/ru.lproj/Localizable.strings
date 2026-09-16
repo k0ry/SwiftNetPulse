@@ -1,0 +1,77 @@
+/* Report chrome */
+"report.title" = "СЕТЕВАЯ ДИАГНОСТИКА";
+"report.date" = "Дата: %1$@";
+"report.network_type" = "Тип сети: %1$@";
+"report.local_ip" = "Локальный IP: %1$@";
+"report.dns_servers" = "DNS-серверы: %1$@";
+"report.vpn" = "VPN обнаружен: %1$@";
+"report.vpn.yes" = "ДА";
+"report.vpn.no" = "НЕТ";
+"report.finished" = "ДИАГНОСТИКА ЗАВЕРШЕНА";
+
+/* Endpoint */
+"endpoint.separator" = "-----------------------------------------------";
+"endpoint.url" = "Эндпоинт: %1$@";
+"endpoint.host" = "Хост: %1$@";
+
+/* Probe steps */
+"dns.resolved" = "DNS: %1$@";
+"dns.resolved_timed" = "DNS: %1$@ (%2$@)";
+"dns.failed" = "DNS: ошибка";
+"dns.failed_timed" = "DNS: ошибка (%1$@)";
+"tcp.connected" = "TCP: соединение за %1$@";
+"tcp.failed" = "TCP: ошибка за %1$@";
+"https.connect" = "HTTPS-соединение: %1$@";
+"tls.handshake" = "TLS-рукопожатие: %1$@";
+"http.status" = "HTTP-статус: %1$@";
+"http.response" = "HTTP-ответ: %1$@";
+"timing.total" = "Всего: %1$@";
+"timing.speed" = "Скорость: %1$@ %2$@";
+"unit.bytes_per_second" = "Б/с";
+"unit.milliseconds" = "мс";
+
+/* Outcomes */
+"outcome.success" = "Результат: успех";
+"outcome.rule_mismatch" = "Результат: несовпадение правила";
+"outcome.transport_failure" = "Результат: транспортная ошибка (%1$@)";
+"body.preview" = "Просмотр тела:";
+"body.binary" = "<двоичные данные>";
+"raw.system_detail" = "Системные сведения (без перевода): %1$@";
+
+/* Traceroute */
+"trace.start" = "Начало трассировки";
+"trace.unavailable" = "Трассировка недоступна: %1$@";
+"trace.hop" = "%1$@: %2$@ %3$@ |";
+"trace.timeout_marker" = "*";
+"trace.socket" = "не удалось открыть ICMP-сокет";
+"trace.dns" = "не удаётся разрешить %1$@ для traceroute";
+"trace.ipv4_only" = "traceroute поддерживает только IPv4";
+
+/* Path types */
+"path.wifi" = "Wi-Fi";
+"path.cellular" = "сотовая";
+"path.ethernet" = "Ethernet";
+"path.loopback" = "loopback";
+"path.other" = "другая";
+"path.unsatisfied" = "нет сети";
+
+/* ConnectionMonitorError */
+"error.empty_endpoints" = "ConnectionMonitor требует хотя бы один эндпоинт";
+"error.invalid_interval" = "Интервал мониторинга должен быть больше нуля";
+
+/* Transport failures */
+"failure.missing_host" = "отсутствует хост";
+"failure.dns_failed" = "Ошибка DNS для %1$@";
+"failure.timeout_before_tcp" = "таймаут до TCP";
+"failure.timeout_before_http" = "таймаут до HTTP";
+"failure.tcp_failed" = "TCP %1$@:%2$@ не удался";
+"failure.no_http_status" = "нет HTTP-статуса";
+"failure.non_http_response" = "не HTTP-ответ";
+"failure.url_timeout" = "истекло время ожидания запроса";
+"failure.url_dns" = "ошибка DNS-поиска";
+"failure.url_connect" = "ошибка соединения";
+"failure.url_offline" = "устройство не в сети";
+"failure.url_cancelled" = "запрос отменён";
+"failure.url_tls" = "ошибка TLS-рукопожатия";
+"failure.url_generic" = "транспортная ошибка %1$@ %2$@";
+"failure.generic_transport" = "транспортная ошибка";

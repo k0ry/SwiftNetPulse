@@ -1,62 +1,67 @@
-# SwiftNetPulse — проект платной коммерческой лицензии
+# SwiftNetPulse — draft paid commercial license
 
-**ЧЕРНОВИК ДЛЯ СОГЛАСОВАНИЯ. Не оферта, не заключённый договор и не разрешение
-коммерческого использования.** Цена и объём прав не установлены.
+**DRAFT FOR NEGOTIATION. Not an offer, not a concluded contract, and not
+permission for commercial use.** Price and scope of rights are not set.
 
-## Стороны и предмет
+English is proposed as the controlling text of a future commercial agreement.
+The Russian translation in `docs/ru/COMMERCIAL-LICENSE.md` is informational.
+That priority is not in force while this document remains a draft. A separately
+executed commercial agreement is controlled by its own agreed language clause.
 
-- Лицензиар, основание владения правами, реквизиты: [ЗАПОЛНИТЬ].
-- Лицензиат и реквизиты: [ЗАПОЛНИТЬ].
-- Уполномоченные представители сторон: [ЗАПОЛНИТЬ].
-- Контакт для приобретения лицензии: [ПОДТВЕРЖДЁННЫЙ КОНТАКТ].
-- Программа: SwiftNetPulse, версии/коммиты: [ЗАПОЛНИТЬ].
-- Продукт(ы) и сценарии лицензиата: [ЗАПОЛНИТЬ].
+## Parties and subject
 
-Предмет будущего договора — предоставление за вознаграждение неисключительных
-прав коммерческого использования Программы в согласованных пределах.
+- Licensor, basis of ownership, details: [FILL IN].
+- Licensee and details: [FILL IN].
+- Authorized representatives of the parties: [FILL IN].
+- Contact for purchasing a license: [CONFIRMED CONTACT].
+- Program: SwiftNetPulse, versions/commits: [FILL IN].
+- Licensee product(s) and scenarios: [FILL IN].
 
-## Объём прав — обязательное приложение к договору
+The subject of a future agreement is the grant, for a fee, of non-exclusive
+rights of commercial use of the Program within agreed limits.
 
-Для каждого способа использования указать «разрешено» или «не разрешено»
-и ограничения; незаполненное поле не означает предоставления права.
+## Scope of rights — mandatory schedule to the agreement
 
-| Условие | Согласуемое значение |
+For each mode of use state “permitted” or “not permitted” and any limits; an
+unfilled field does not grant a right.
+
+| Term | Value to be agreed |
 | --- | --- |
-| Запуск, воспроизведение и внутренняя эксплуатация | [ЗАПОЛНИТЬ] |
-| Изменение и интеграция в приложения | [ЗАПОЛНИТЬ] |
-| Распространение в составе бинарных приложений | [ЗАПОЛНИТЬ] |
-| Распространение исходников и модификаций библиотеки | [ЗАПОЛНИТЬ] |
-| SaaS, облачный и серверный доступ | [ЗАПОЛНИТЬ] |
-| Права конечных пользователей, сублицензирование | [ЗАПОЛНИТЬ] |
-| Доступ подрядчиков и аффилированных организаций | [ЗАПОЛНИТЬ] |
-| Число продуктов, разработчиков и установок, если ограничено | [ЗАПОЛНИТЬ] |
-| Территория и срок | [ЗАПОЛНИТЬ] |
-| Новые версии и обновления | [ЗАПОЛНИТЬ] |
-| Сохранение уведомлений об авторских правах | [ЗАПОЛНИТЬ] |
-| Патентные права, если предоставляются | [ЗАПОЛНИТЬ] |
+| Running, reproduction, and internal operation | [FILL IN] |
+| Modification and integration into applications | [FILL IN] |
+| Distribution as part of binary applications | [FILL IN] |
+| Distribution of sources and modifications of the library | [FILL IN] |
+| SaaS, cloud, and server access | [FILL IN] |
+| End-user rights, sublicensing | [FILL IN] |
+| Access by contractors and affiliates | [FILL IN] |
+| Number of products, developers, and installations, if limited | [FILL IN] |
+| Territory and term | [FILL IN] |
+| New versions and updates | [FILL IN] |
+| Retention of copyright notices | [FILL IN] |
+| Patent rights, if granted | [FILL IN] |
 
-Правообладатель сохраняет исключительные права на исходную Программу.
-Права на модификации и возможность их передачи правообладателю согласуются
-отдельно: [ЗАПОЛНИТЬ]. Коммерческий договор заменяет ограничение некоммерческого
-использования только в пределах явно предоставленных им прав.
+The rightsholder retains exclusive rights in the original Program. Rights in
+modifications and any assignment of them to the rightsholder are agreed
+separately: [FILL IN]. A commercial agreement replaces the noncommercial-use
+restriction only within the rights it expressly grants.
 
-## Вознаграждение и начало действия
+## Fee and commencement
 
-Цена, валюта, налоги, порядок и сроки оплаты: [ЗАПОЛНИТЬ].
-Момент заключения договора, начала предоставления прав и связь с оплатой:
-[ЗАПОЛНИТЬ]. Подписание или иной согласованный способ принятия: [ЗАПОЛНИТЬ].
+Price, currency, taxes, payment procedure and dates: [FILL IN].
+Moment of conclusion, commencement of the grant, and link to payment:
+[FILL IN]. Signature or another agreed method of acceptance: [FILL IN].
 
-## Остальные существенные условия
+## Other material terms
 
-- Поддержка, обновления, SLA либо их отсутствие: [ЗАПОЛНИТЬ].
-- Гарантии, ответственность и допустимые ограничения: [ЗАПОЛНИТЬ].
-- Порядок прекращения, исправления нарушений и возврата оплаты: [ЗАПОЛНИТЬ].
-- Судьба уже распространённых приложений и прав их пользователей после
-  прекращения договора: [ЗАПОЛНИТЬ].
-- Применимое право, разрешение споров и юридически значимые уведомления:
-  [ЗАПОЛНИТЬ].
-- Дата, подписи/согласованный способ акцепта: [ЗАПОЛНИТЬ].
+- Support, updates, SLA, or their absence: [FILL IN].
+- Warranties, liability, and permitted limitations: [FILL IN].
+- Termination, cure of breach, and refunds: [FILL IN].
+- Fate of already distributed applications and their users’ rights after
+  termination: [FILL IN].
+- Governing law, dispute resolution, and legally significant notices:
+  [FILL IN].
+- Date, signatures / agreed method of acceptance: [FILL IN].
 
-До подписания заполненного договора правообладатель и лицензиат должны проверить
-его применимость к своей юрисдикции. Этот шаблон не устанавливает цену, срок,
-лимиты или гарантии по умолчанию.
+Before a completed agreement is signed, the rightsholder and the licensee must
+check its applicability to their jurisdiction. This template does not set a
+default price, term, limits, or warranties.
