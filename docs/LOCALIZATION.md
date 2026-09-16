@@ -14,7 +14,7 @@ HTTP status codes, and response bodies) are never translated.
 
 ## Inventory
 
-Owned strings live in documentation, license drafts, `make help`,
+Owned strings live in documentation, `make help`,
 `Localizable.strings`, and `LocalizedError` English defaults.
 
 | Surface | English source | Russian equivalent |
@@ -22,9 +22,7 @@ Owned strings live in documentation, license drafts, `make help`,
 | Installation and quick start | `README.md` | `docs/ru/README.md` |
 | Setup, architecture, limits | `DEVELOPMENT.md` | `docs/ru/DEVELOPMENT.md` |
 | Licensing overview | `LICENSING.md` | `docs/ru/LICENSING.md` |
-| License status | `LICENSE` | `docs/ru/LICENSE.md` |
-| Noncommercial draft | `LICENSE-NONCOMMERCIAL.md` | `docs/ru/LICENSE-NONCOMMERCIAL.md` |
-| Commercial draft | `COMMERCIAL-LICENSE.md` | `docs/ru/COMMERCIAL-LICENSE.md` |
+| CC BY 4.0 license | `LICENSE` | `docs/ru/LICENSE.md` |
 | This workflow and glossary | `docs/LOCALIZATION.md` | `docs/ru/LOCALIZATION.md` |
 | API usage guide | `docs/API.md` | `docs/ru/API.md` |
 | Runtime messages | `Sources/SwiftNetPulse/Resources/en.lproj/Localizable.strings` | `…/ru.lproj/Localizable.strings` |

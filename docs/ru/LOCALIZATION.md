@@ -14,7 +14,7 @@
 
 ## Инвентарь
 
-Принадлежащие библиотеке строки находятся в документации, черновиках лицензий,
+Принадлежащие библиотеке строки находятся в документации,
 `make help`, `Localizable.strings` и английских значениях `LocalizedError`.
 
 | Поверхность | Английский источник | Русский эквивалент |
@@ -22,9 +22,7 @@
 | Установка и быстрый старт | `README.md` | `docs/ru/README.md` |
 | Окружение, архитектура, ограничения | `DEVELOPMENT.md` | `docs/ru/DEVELOPMENT.md` |
 | Обзор лицензирования | `LICENSING.md` | `docs/ru/LICENSING.md` |
-| Статус лицензии | `LICENSE` | `docs/ru/LICENSE.md` |
-| Некоммерческий черновик | `LICENSE-NONCOMMERCIAL.md` | `docs/ru/LICENSE-NONCOMMERCIAL.md` |
-| Коммерческий черновик | `COMMERCIAL-LICENSE.md` | `docs/ru/COMMERCIAL-LICENSE.md` |
+| Лицензия CC BY 4.0 | `LICENSE` | `docs/ru/LICENSE.md` |
 | Этот процесс и глоссарий | `docs/LOCALIZATION.md` | `docs/ru/LOCALIZATION.md` |
 | Руководство по API | `docs/API.md` | `docs/ru/API.md` |
 | Сообщения библиотеки | `Sources/SwiftNetPulse/Resources/en.lproj/Localizable.strings` | `…/ru.lproj/Localizable.strings` |

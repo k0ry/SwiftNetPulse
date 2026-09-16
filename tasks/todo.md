@@ -40,12 +40,11 @@ Files: LICENSE, LICENSING.md, docs/ru/LICENSE.md, docs/ru/LICENSING.md.
 Description: Produce English drafts and corresponding informational Russian translations.
 Acceptance:
 
-- [x] NC restriction and separate paid-license model unchanged.
-- [x] No contract terms filled by assumption.
-- [x] Language priority remains subject to adoption.
-Verification: clause-by-clause legal translation review; link/placeholder check.
+- [x] Single public license is CC BY 4.0; commercial and noncommercial drafts removed.
+- [x] English LICENSE is the legal code; Russian page is informational.
+Verification: localization checks; link review.
 Dependencies: 3.
-Files: LICENSE-NONCOMMERCIAL.md, COMMERCIAL-LICENSE.md, docs/ru/LICENSE-NONCOMMERCIAL.md, docs/ru/COMMERCIAL-LICENSE.md.
+Files: LICENSE, LICENSING.md, docs/ru/LICENSE.md, docs/ru/LICENSING.md.
 
 ## 5. Translation maintenance workflow (M)
 Description: Record source revisions/digests, glossary and stale-translation handling.

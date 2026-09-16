@@ -17,11 +17,10 @@ fixture matches `LogFormatter` default output
 ## Tasks 2–5 — bilingual docs and workflow (checkpoint A)
 
 Root guides are English: `README.md`, `DEVELOPMENT.md`, `LICENSE`,
-`LICENSING.md`, `LICENSE-NONCOMMERCIAL.md`, `COMMERCIAL-LICENSE.md`.
-Russian counterparts live under `docs/ru/` with language navigation.
-Unresolved legal fields and DRAFT/ЧЕРНОВИК markers are preserved. No
-rightsholder, contact, or price was invented. `docs/translations.json` maps
-pages, source SHA-256 (LF-normalized), placeholder IDs, and draft markers.
+`LICENSING.md`. Russian counterparts live under `docs/ru/` with language
+navigation. The public license is CC BY 4.0 in `LICENSE`. Commercial and
+noncommercial drafts were removed. `docs/translations.json` maps pages and
+source SHA-256 (LF-normalized).
 
 `python3 scripts/check-localization.py` — localization checks passed.
 

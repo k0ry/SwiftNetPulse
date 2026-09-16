@@ -6,14 +6,13 @@ Additional languages follow the same workflow; no automatic promise to support a
 
 ## Current state
 
-- README.md, DEVELOPMENT.md, LICENSE, LICENSE-NONCOMMERCIAL.md,
-  COMMERCIAL-LICENSE.md, LICENSING.md and Makefile help are Russian.
+- README.md, DEVELOPMENT.md, LICENSE, LICENSING.md and Makefile help are Russian.
 - Swift API identifiers and most runtime messages are English.
 - LogFormatter classifies some failures by searching message strings for DNS/TCP.
 - HTTPProbe exposes system-localized error.localizedDescription, so reports can mix languages.
 - Report/traceroute properties store or return formatted text; structured results also exist.
 - SwiftPM has no localized resources or defaultLocalization.
-- License documents remain drafts with unresolved ownership/contact/contract fields.
+- License is CC BY 4.0 in `LICENSE`; Russian summary in `docs/ru/LICENSE.md`.
 
 ## Language policy
 
@@ -34,10 +33,9 @@ Language selectors link to corresponding pages, using English / Русский, 
 Keep canonical English root files to preserve repository discovery and existing links:
 
 - README.md, DEVELOPMENT.md, LICENSING.md
-- LICENSE, LICENSE-NONCOMMERCIAL.md, COMMERCIAL-LICENSE.md
+- LICENSE
 - docs/ru/README.md, docs/ru/DEVELOPMENT.md, docs/ru/LICENSING.md
-- docs/ru/LICENSE.md, docs/ru/LICENSE-NONCOMMERCIAL.md,
-  docs/ru/COMMERCIAL-LICENSE.md
+- docs/ru/LICENSE.md
 - docs/LOCALIZATION.md and docs/ru/LOCALIZATION.md: translator workflow and glossary
 - docs/translations.json: document mapping, source digest/revision, translation status
 
@@ -158,9 +156,7 @@ use the following concrete plan. No source implementation is authorized by this 
 | Installation, quick start, examples | README.md | docs/ru/README.md | Links, example parity, compile examples |
 | Setup, architecture, limitations | DEVELOPMENT.md | docs/ru/DEVELOPMENT.md | Commands, documented platform limits |
 | Licensing overview | LICENSING.md | docs/ru/LICENSING.md | Clause/placeholder review |
-| License status | LICENSE | docs/ru/LICENSE.md | Draft markers, references |
-| Noncommercial draft | LICENSE-NONCOMMERCIAL.md | docs/ru/LICENSE-NONCOMMERCIAL.md | Legal semantic review |
-| Commercial terms draft | COMMERCIAL-LICENSE.md | docs/ru/COMMERCIAL-LICENSE.md | Unresolved fields preserved |
+| CC BY 4.0 license | LICENSE | docs/ru/LICENSE.md | Official legal code plus informational summary |
 | Translation workflow/glossary | docs/LOCALIZATION.md | docs/ru/LOCALIZATION.md | Source revision, adding-language example |
 | API usage and language selection | docs/API.md | docs/ru/API.md | Compiled examples, matching public symbols |
 | Swift source API comments | Source declarations | Localized API guide | English docs build/inspection |

@@ -124,19 +124,8 @@ Public API usage: [docs/API.md](docs/API.md).
 
 ## Licensing
 
-SwiftNetPulse is planned to use dual licensing:
+SwiftNetPulse is licensed under [Creative Commons Attribution 4.0
+International](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0).
+You may copy, modify, and use it, including commercially, with attribution.
 
-- Free use solely for noncommercial purposes under the
-  [noncommercial license](LICENSE-NONCOMMERCIAL.md).
-- Commercial use, including in paid or monetized applications and internal
-  business tools, requires a separate paid license.
-  [Draft commercial terms](COMMERCIAL-LICENSE.md).
-
-**The license documents are drafts and do not grant rights:** the rightsholder
-must be confirmed, the placeholders filled in, and the final texts adopted.
-Contact for purchasing a license: **[CONFIRMED CONTACT — FILL IN]**.
-Price and commercial terms are not yet set.
-
-This is a source-available model with a restriction on purpose of use, not
-open source. Overall status is in [LICENSE](LICENSE); remaining fields and
-sources are in [LICENSING.md](LICENSING.md).
+The license text is in [LICENSE](LICENSE). Overview: [LICENSING.md](LICENSING.md).
